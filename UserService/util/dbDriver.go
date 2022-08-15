@@ -12,12 +12,12 @@ import (
 
 var (
 	accounts = []model.Account{
-		{Username: "admin", Password: "adminpass", Active: true, BannedUntil: time.Time{}},
-		{Username: "user1", Password: "user1pass", Active: true, BannedUntil: time.Time{}},
-		{Username: "user2", Password: "user2pass", Active: true, BannedUntil: time.Time{}},
-		{Username: "user3", Password: "user3pass", Active: false, BannedUntil: time.Time{}},
-		{Username: "worker1", Password: "worker1pass", Active: true, BannedUntil: time.Time{}},
-		{Username: "worker2", Password: "worker2pass", Active: true, BannedUntil: time.Time{}},
+		{Username: "admin", Password: "adminpass", Active: true, BlockedUntil: time.Time{}},
+		{Username: "user1", Password: "user1pass", Active: true, BlockedUntil: time.Time{}},
+		{Username: "user2", Password: "user2pass", Active: true, BlockedUntil: time.Time{}},
+		{Username: "user3", Password: "user3pass", Active: false, BlockedUntil: time.Time{}},
+		{Username: "worker1", Password: "worker1pass", Active: true, BlockedUntil: time.Time{}},
+		{Username: "worker2", Password: "worker2pass", Active: true, BlockedUntil: time.Time{}},
 	}
 
 	admins = []model.Admin{

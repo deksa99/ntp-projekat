@@ -8,10 +8,10 @@ import (
 
 type Account struct {
 	gorm.Model
-	Username    string    `gorm:"not null;default:null;size:4..128"`
-	Password    string    `gorm:"not null;default:null;size:6..128"`
-	Active      bool      `gorm:"not null;default:false"`
-	BannedUntil time.Time `gorm:"default:null"`
+	Username     string    `gorm:"not null;default:null;size:4..128"`
+	Password     string    `gorm:"not null;default:null;size:6..128"`
+	Active       bool      `gorm:"not null;default:false"`
+	BlockedUntil time.Time `gorm:"default:null"`
 }
 
 type User struct {
