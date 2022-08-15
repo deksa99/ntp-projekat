@@ -1,6 +1,7 @@
 package main
 
 import (
+	"UserService/util"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -15,5 +16,6 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 
+	util.ConnectToDatabase()
 	log.Print("UserService started")
 }
