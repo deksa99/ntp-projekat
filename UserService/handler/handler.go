@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"UserService/model"
+	"UserService/request"
 	"UserService/response"
+	"UserService/service"
 	"UserService/util/converter"
 	"UserService/util/helper"
 	"errors"
@@ -20,9 +21,11 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func Register(w http.ResponseWriter, r *http.Request) {
-	var user model.User
+	var userRequest request.CreateUser
 
-	err := helper.DecodeJSONBody(w, r, &user)
+	err := helper.DecodeJSONBody(w, r, &userRequest)
+
+	w.Header().Set("Content-Type", "application/json")
 
 	if err != nil {
 		var e *response.Error
@@ -34,15 +37,22 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+	// TODO add to database
+
+	user, err := service.CreateUser()
+
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-	err = json.NewEncoder(w).Encode(converter.UserToUserInfo(&user))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(converter.UserToUserInfo(&user))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 	}
 }
 

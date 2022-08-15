@@ -8,7 +8,7 @@ import (
 
 type Account struct {
 	gorm.Model
-	Username     string    `gorm:"not null;default:null;size:4..128"`
+	Username     string    `gorm:"not null;default:null;size:4..128;unique"`
 	Password     string    `gorm:"not null;default:null;size:6..128"`
 	Active       bool      `gorm:"not null;default:false"`
 	BlockedUntil time.Time `gorm:"default:null"`
@@ -18,7 +18,7 @@ type User struct {
 	gorm.Model
 	FirstName string `gorm:"not null;default:null;size:256"`
 	LastName  string `gorm:"not null;default:null;size:256"`
-	Email     string `gorm:"not null;default:null"`
+	Email     string `gorm:"not null;default:null;unique"`
 	AccountID uint
 	Account   Account `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }

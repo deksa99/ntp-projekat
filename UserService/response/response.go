@@ -12,7 +12,6 @@ func (e *Error) Error() string {
 type UserInfo struct {
 	Id        uint   `json:"Id"`
 	Email     string `json:"Email"`
-	Username  string `json:"Username"`
 	FirstName string `json:"FirstName"`
 	LastName  string `json:"LastName"`
 }

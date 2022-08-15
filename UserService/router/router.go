@@ -9,14 +9,15 @@ import (
 )
 
 func HandleRequests() {
-	router := mux.NewRouter()
-	router.HandleFunc("/api/users/login", handler.Login).Methods("POST")
-	router.HandleFunc("/api/users/register", handler.Register).Methods("POST")
-	router.HandleFunc("/api/users/change-password", handler.ChangePassword).Methods("POST")
-	router.HandleFunc("/api/users/{id}", handler.FindUser).Methods("GET")
-	router.HandleFunc("/api/users/{id}", handler.UpdateUser).Methods("PATCH")
-	router.HandleFunc("/api/users", handler.FindAllUsers).Methods("GET")
-	router.HandleFunc("/api/users/{id}/block", handler.BlockUser).Methods("PATCH")
+	router := mux.NewRouter().PathPrefix("/api/users").Subrouter()
+
+	router.HandleFunc("/login", handler.Login).Methods("POST")
+	router.HandleFunc("/register", handler.Register).Methods("POST")
+	router.HandleFunc("/change-password", handler.ChangePassword).Methods("POST")
+	router.HandleFunc("/{id}", handler.FindUser).Methods("GET")
+	router.HandleFunc("/{id}", handler.UpdateUser).Methods("PATCH")
+	router.HandleFunc("", handler.FindAllUsers).Methods("GET")
+	router.HandleFunc("/{id}/block", handler.BlockUser).Methods("PATCH")
 
 	log.Fatal(http.ListenAndServe(":8081", router))
 }
