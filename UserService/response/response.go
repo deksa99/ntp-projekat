@@ -15,3 +15,7 @@ type UserInfo struct {
 	FirstName string `json:"FirstName"`
 	LastName  string `json:"LastName"`
 }
+
+type Jwt struct {
+	Token string `json:"Token"`
+}

@@ -37,8 +37,8 @@ var (
 	}
 
 	serviceWorkers = []model.ServiceWorker{
-		{FirstName: "Mika", LastName: "Mikic", Main: true, AccountID: 2},
-		{FirstName: "Mika", LastName: "Mikic", Main: false, AccountID: 2},
+		{FirstName: "Mika", LastName: "Mikic", Main: true, AccountID: 5},
+		{FirstName: "Mika", LastName: "Mikic", Main: false, AccountID: 6},
 	}
 )
 

@@ -11,12 +11,39 @@ import (
 
 	"encoding/json"
 	"net/http"
-	"os"
 )
 
-var jwtKey = []byte(os.Getenv("JWT_KEY"))
-
 func Login(w http.ResponseWriter, r *http.Request) {
+	var loginRequest request.Login
+
+	err := helper.DecodeJSONBody(w, r, &loginRequest)
+	role := r.URL.Query().Get("role")
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		var e *response.Error
+		if errors.As(err, &e) {
+			http.Error(w, e.Message, e.Status)
+		} else {
+			log.Print(err.Error())
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	jwt, err := service.Login(loginRequest.Username, loginRequest.Password, role)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	} else {
+		err = json.NewEncoder(w).Encode(jwt)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 
 }
 

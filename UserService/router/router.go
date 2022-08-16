@@ -11,7 +11,7 @@ import (
 func HandleRequests() {
 	router := mux.NewRouter().PathPrefix("/api/users").Subrouter()
 
-	router.HandleFunc("/login", handler.Login).Methods("POST")
+	router.Path("/login").Queries("role", "{role:user|admin|worker}").HandlerFunc(handler.Login).Methods("POST")
 	router.HandleFunc("/register", handler.Register).Methods("POST")
 	router.HandleFunc("/change-password", handler.ChangePassword).Methods("POST")
 	router.HandleFunc("/{id}", handler.FindUser).Methods("GET")
