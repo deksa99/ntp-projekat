@@ -1,4 +1,4 @@
-package util
+package database
 
 import (
 	"UserService/model"
@@ -36,9 +36,12 @@ var (
 	}
 )
 
+var Db *gorm.DB
+var err error
+
 func ConnectToDatabase() {
 	connStr := os.Getenv("DB_CONN_STR")
-	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
+	Db, err = gorm.Open(postgres.Open(connStr), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal(err)
@@ -46,34 +49,58 @@ func ConnectToDatabase() {
 		log.Println("Successfully connected to DB")
 	}
 
-	db.Migrator().DropTable(&model.Account{})
-	db.Migrator().DropTable(&model.User{})
-	db.Migrator().DropTable(&model.ServiceWorker{})
-	db.Migrator().DropTable(&model.Admin{})
+	err = Db.Migrator().DropTable(&model.Account{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.Migrator().DropTable(&model.User{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.Migrator().DropTable(&model.ServiceWorker{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.Migrator().DropTable(&model.Admin{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
 
 	log.Println("Tables dropped successfully")
 
-	db.AutoMigrate(&model.Account{})
-	db.AutoMigrate(&model.User{})
-	db.AutoMigrate(&model.ServiceWorker{})
-	db.AutoMigrate(&model.Admin{})
+	err = Db.AutoMigrate(&model.Account{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.AutoMigrate(&model.User{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.AutoMigrate(&model.ServiceWorker{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
+	err = Db.AutoMigrate(&model.Admin{})
+	if err != nil {
+		log.Panic(err.Error())
+	}
 
 	log.Println("Migration successful")
 
 	for _, account := range accounts {
-		db.Create(&account)
+		Db.Create(&account)
 	}
 
 	for _, admin := range admins {
-		db.Create(&admin)
+		Db.Create(&admin)
 	}
 
 	for _, user := range users {
-		db.Create(&user)
+		Db.Create(&user)
 	}
 
 	for _, serviceWorker := range serviceWorkers {
-		db.Create(&serviceWorker)
+		Db.Create(&serviceWorker)
 	}
 
 	log.Println("DB seeding successful")

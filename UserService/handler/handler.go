@@ -37,9 +37,14 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	// TODO add to database
 
-	user, err := service.CreateUser()
+	user, err := service.CreateUser(
+		userRequest.Username,
+		userRequest.Password,
+		userRequest.FirstName,
+		userRequest.LastName,
+		userRequest.Email,
+	)
 
 	if err != nil {
 		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
