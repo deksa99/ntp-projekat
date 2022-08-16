@@ -8,10 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/handler/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/handler/handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/request/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/request/request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/router/router.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/database/dbDriver.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/database/dbDriver.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

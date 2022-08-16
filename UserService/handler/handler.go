@@ -8,7 +8,9 @@ import (
 	"UserService/util/converter"
 	"UserService/util/helper"
 	"errors"
+	"github.com/gorilla/mux"
 	"log"
+	"strconv"
 
 	"encoding/json"
 	"net/http"
@@ -114,20 +116,40 @@ func ChangePassword(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	} else {
-		w.WriteHeader(http.StatusNoContent)
+		w.WriteHeader(http.StatusOK)
 	}
 }
 
 func FindUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	user, err := service.FindUser(uint(id))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 }
 
-func UpdateUser(w http.ResponseWriter, r *http.Request) {
+func FindAllUsers(w http.ResponseWriter, _ *http.Request) {
+	users := service.FindAllUsers()
 
-}
+	w.Header().Set("Content-Type", "application/json")
 
-func FindAllUsers(w http.ResponseWriter, r *http.Request) {
-
+	err := json.NewEncoder(w).Encode(users)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 }
 
 func BlockUser(w http.ResponseWriter, r *http.Request) {

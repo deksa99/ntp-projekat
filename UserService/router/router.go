@@ -15,7 +15,6 @@ func HandleRequests() {
 	router.HandleFunc("/register", handler.Register).Methods("POST")
 	router.HandleFunc("/change-password", handler.ChangePassword).Methods("PATCH")
 	router.HandleFunc("/{id}", handler.FindUser).Methods("GET")
-	router.HandleFunc("/{id}", handler.UpdateUser).Methods("PATCH")
 	router.HandleFunc("", handler.FindAllUsers).Methods("GET")
 	router.HandleFunc("/{id}/block", handler.BlockUser).Methods("PATCH")
 

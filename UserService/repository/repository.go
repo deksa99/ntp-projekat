@@ -59,6 +59,26 @@ func FindUserByAccountID(accountId uint) (model.User, error) {
 	return user, nil
 }
 
+func FindUsers() []model.User {
+	var users []model.User
+
+	database.Db.Find(&users)
+
+	return users
+}
+
+func FindUserById(id uint) (model.User, error) {
+	var user model.User
+
+	database.Db.First(&user, id)
+
+	if user.ID == 0 {
+		return user, errors.New("user not found")
+	}
+
+	return user, nil
+}
+
 func FindAdminByAccountID(accountId uint) (model.Admin, error) {
 	var admin model.Admin
 

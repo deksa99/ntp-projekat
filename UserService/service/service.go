@@ -4,6 +4,7 @@ import (
 	"UserService/model"
 	"UserService/repository"
 	"UserService/response"
+	"UserService/util/converter"
 	"errors"
 	"os"
 	"time"
@@ -101,9 +102,9 @@ func createJwt(acc model.Account, role string) response.Jwt {
 
 	tokenString, _ := token.SignedString(jwtKey)
 
-	jwt := response.Jwt{Token: tokenString}
+	jwtR := response.Jwt{Token: tokenString}
 
-	return jwt
+	return jwtR
 }
 
 func ChangePassword(accId uint, password string, newPassword string) error {
@@ -131,4 +132,28 @@ func ChangePassword(accId uint, password string, newPassword string) error {
 	}
 
 	return nil
+}
+
+func FindAllUsers() []response.UserInfo {
+	users := repository.FindUsers()
+
+	var userInfos []response.UserInfo
+
+	for _, u := range users {
+		userInfos = append(userInfos, converter.UserToUserInfo(&u))
+	}
+
+	return userInfos
+}
+
+func FindUser(id uint) (response.UserInfo, error) {
+	user, err := repository.FindUserById(id)
+
+	if err != nil {
+		return response.UserInfo{}, err
+	}
+
+	ui := converter.UserToUserInfo(&user)
+
+	return ui, nil
 }
