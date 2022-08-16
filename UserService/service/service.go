@@ -49,7 +49,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 	}
 
 	if time.Now().Before(acc.BlockedUntil) {
-		return response.Jwt{}, errors.New("Account blocked until: " + acc.BlockedUntil.String())
+		return response.Jwt{}, errors.New("account blocked until: " + acc.BlockedUntil.String())
 	}
 
 	switch role {
@@ -104,4 +104,31 @@ func createJwt(acc model.Account, role string) response.Jwt {
 	jwt := response.Jwt{Token: tokenString}
 
 	return jwt
+}
+
+func ChangePassword(accId uint, password string, newPassword string) error {
+	acc, err := repository.FindAccountById(accId)
+
+	if err != nil {
+		return err
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(acc.Password), []byte(password))
+
+	if err != nil {
+		return errors.New("invalid username or password")
+	}
+
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newPassword), 12)
+	if err != nil {
+		return err
+	}
+
+	err = repository.UpdatePassword(accId, string(hashedPassword))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

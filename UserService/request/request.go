@@ -12,3 +12,8 @@ type Login struct {
 	Username string `json:"Username"`
 	Password string `json:"Password"`
 }
+
+type ChangePassword struct {
+	Password    string `json:"Password"`
+	NewPassword string `json:"NewPassword"`
+}

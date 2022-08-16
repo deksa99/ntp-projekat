@@ -35,6 +35,18 @@ func FindAccountByUsername(username string) (model.Account, error) {
 	return acc, nil
 }
 
+func FindAccountById(id uint) (model.Account, error) {
+	var acc model.Account
+
+	database.Db.Table("accounts").Where("id = ?", id).First(&acc)
+
+	if acc.ID == 0 {
+		return acc, errors.New("account not found")
+	}
+
+	return acc, nil
+}
+
 func FindUserByAccountID(accountId uint) (model.User, error) {
 	var user model.User
 
@@ -69,4 +81,19 @@ func FindWorkerByAccountID(accountId uint) (model.ServiceWorker, error) {
 	}
 
 	return worker, nil
+}
+
+func UpdatePassword(id uint, newPassword string) error {
+	var acc model.Account
+
+	database.Db.First(&acc, id)
+
+	if acc.ID == 0 {
+		return errors.New("account not found")
+	}
+
+	acc.Password = newPassword
+	database.Db.Save(&acc)
+
+	return nil
 }

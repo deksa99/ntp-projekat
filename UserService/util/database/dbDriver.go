@@ -12,7 +12,7 @@ import (
 
 var (
 	accounts = []model.Account{
-		{Username: "admin", Password: "$2a$12$mY35hEYpanAgN6NQY9m69O/arJI3.pcH9pvTZkvfv/xFL.O4Ueyse",
+		{Username: "admin", Password: "$2a$12$jhJ7spSwiuuY2qxI0mAwgOiM//GFaUf9ftY5oIXo5wIAPZkSsLdYS",
 			Active: true, BlockedUntil: time.Time{}},
 		{Username: "user1", Password: "$2a$12$U0n6l/2jYCzDHkqdwnEGdOv.DdM0rWNwECIEDluN6YGeCkX6B1w62",
 			Active: true, BlockedUntil: time.Time{}},

@@ -4,6 +4,7 @@ import (
 	"UserService/request"
 	"UserService/response"
 	"UserService/service"
+	"UserService/util/auth"
 	"UserService/util/converter"
 	"UserService/util/helper"
 	"errors"
@@ -89,7 +90,32 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
+	roles := []string{"user", "admin", "worker"}
+	accId, err := auth.Validate(r, roles)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusForbidden)
+		return
+	}
+
+	var changePassword request.ChangePassword
+
+	err = helper.DecodeJSONBody(w, r, &changePassword)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = service.ChangePassword(accId, changePassword.Password, changePassword.NewPassword)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	} else {
+		w.WriteHeader(http.StatusNoContent)
+	}
 }
 
 func FindUser(w http.ResponseWriter, r *http.Request) {
