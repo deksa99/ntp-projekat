@@ -153,5 +153,25 @@ func FindAllUsers(w http.ResponseWriter, _ *http.Request) {
 }
 
 func BlockUser(w http.ResponseWriter, r *http.Request) {
+	roles := []string{"admin"}
+	_, err := auth.Validate(r, roles)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusForbidden)
+		return
+	}
+
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
+
+	err = service.BlockUser(uint(id))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	} else {
+		w.WriteHeader(http.StatusOK)
+	}
 }

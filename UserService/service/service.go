@@ -157,3 +157,13 @@ func FindUser(id uint) (response.UserInfo, error) {
 
 	return ui, nil
 }
+
+func BlockUser(accId uint) error {
+	err := repository.BlockUser(accId)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

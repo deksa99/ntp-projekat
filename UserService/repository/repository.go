@@ -5,6 +5,7 @@ import (
 	"UserService/util/database"
 	"errors"
 	"net/mail"
+	"time"
 )
 
 func CreateUser(user model.User) (model.User, error) {
@@ -113,6 +114,21 @@ func UpdatePassword(id uint, newPassword string) error {
 	}
 
 	acc.Password = newPassword
+	database.Db.Save(&acc)
+
+	return nil
+}
+
+func BlockUser(id uint) error {
+	var acc model.Account
+
+	database.Db.First(&acc, id)
+
+	if acc.ID == 0 {
+		return errors.New("account not found")
+	}
+
+	acc.BlockedUntil = time.Now().Add(time.Hour * 72)
 	database.Db.Save(&acc)
 
 	return nil
