@@ -12,12 +12,18 @@ import (
 
 var (
 	accounts = []model.Account{
-		{Username: "admin", Password: "adminpass", Active: true, BlockedUntil: time.Time{}},
-		{Username: "user1", Password: "user1pass", Active: true, BlockedUntil: time.Time{}},
-		{Username: "user2", Password: "user2pass", Active: true, BlockedUntil: time.Time{}},
-		{Username: "user3", Password: "user3pass", Active: false, BlockedUntil: time.Time{}},
-		{Username: "worker1", Password: "worker1pass", Active: true, BlockedUntil: time.Time{}},
-		{Username: "worker2", Password: "worker2pass", Active: true, BlockedUntil: time.Time{}},
+		{Username: "admin", Password: "$2a$12$mY35hEYpanAgN6NQY9m69O/arJI3.pcH9pvTZkvfv/xFL.O4Ueyse",
+			Active: true, BlockedUntil: time.Time{}},
+		{Username: "user1", Password: "$2a$12$U0n6l/2jYCzDHkqdwnEGdOv.DdM0rWNwECIEDluN6YGeCkX6B1w62",
+			Active: true, BlockedUntil: time.Time{}},
+		{Username: "user2", Password: "$2a$12$wSZ.iF1w5UaQGnBJtcezEeQYOXiW2tNQ113nojrR1rirejbbI/lOW",
+			Active: true, BlockedUntil: time.Time{}},
+		{Username: "user3", Password: "$2a$12$AUv8/BqOs24eFcS7tka8GOoTdVi6EmOHU/Rk.fKCcd7BA5zBsQ8Lm",
+			Active: false, BlockedUntil: time.Time{}},
+		{Username: "worker1", Password: "$2a$12$gIuAQPRYpOUCCJCIsiVE6uvxd6z3eK5RHRzOZP/VfAK8v/PDY/oV.",
+			Active: true, BlockedUntil: time.Time{}},
+		{Username: "worker2", Password: "$2a$12$UwnKoVSME0ti9O9UKwTdoeu/LJs/Tl8CpV3IWK9CaM8p6KHS5JMLa",
+			Active: true, BlockedUntil: time.Time{}},
 	}
 
 	admins = []model.Admin{
