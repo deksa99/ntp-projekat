@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ApiGateway.iml" filepath="$PROJECT_DIR$/.idea/ApiGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/../UserService/.idea/UserService.iml" filepath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../VehicleService/.idea/VehicleService.iml" filepath="$PROJECT_DIR$/../VehicleService/.idea/VehicleService.iml" />
     </modules>
   </component>
 </project>
