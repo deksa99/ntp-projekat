@@ -11,7 +11,7 @@ func VehicleToVehicleInfo(vehicle *model.Vehicle) response.VehicleInfo {
 		Manufacturer:  vehicle.Manufacturer,
 		CarModel:      vehicle.CarModel,
 		Color:         vehicle.Color,
-		LicensePlate:  vehicle.LicensePlate,
+		LicensePlate:  vehicle.LicencePlate,
 		ChassisNumber: vehicle.ChassisNumber,
 	}
 }

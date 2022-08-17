@@ -2,6 +2,15 @@ package response
 
 import "VehicleService/model"
 
+type Error struct {
+	Message string `json:"Message"`
+	Status  int    `json:"Status"`
+}
+
+func (e *Error) Error() string {
+	return e.Message
+}
+
 type VehicleInfo struct {
 	Id            uint               `json:"Id"`
 	Manufacturer  model.Manufacturer `json:"Manufacturer"`

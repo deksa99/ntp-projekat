@@ -3,10 +3,11 @@ package request
 import "VehicleService/model"
 
 type AddVehicle struct {
+	UserId        uint               `json:"UserId"`
 	Manufacturer  model.Manufacturer `json:"Manufacturer"`
 	CarModel      string             `json:"CarModel"`
 	Color         string             `json:"Color"`
-	LicensePlate  string             `json:"LicensePlate"`
+	LicencePlate  string             `json:"LicencePlate"`
 	ChassisNumber string             `json:"ChassisNumber"`
 }
 
