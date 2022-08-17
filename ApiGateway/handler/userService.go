@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"ApiGateway/util/auth"
 	"ApiGateway/util/response"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -21,8 +22,13 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
-	url := response.UserServiceRoundRobin.Next().Host + "/api/users/change-password"
-	// TODO authorize
+	resp, err := auth.Authentication(w, r, []string{"user", "admin", "worker"})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusForbidden)
+		return
+	}
+	id := resp.Id
+	url := response.UserServiceRoundRobin.Next().Host + "/api/users/" + strconv.Itoa(int(id)) + "/change-password"
 
 	handleRequest(w, r, url)
 }
