@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"UserService/response"
 	"errors"
 	"net/http"
 	"os"
@@ -10,15 +11,15 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 )
 
-func Validate(r *http.Request, roles []string) (uint, error) {
+func Validate(r *http.Request, roles []string) (response.Authentication, error) {
 	header := r.Header.Values("Authorization")
 	if len(header) == 0 {
-		return 0, errors.New("header authorization not found")
+		return response.Authentication{}, errors.New("header authorization not found")
 	}
 
 	tokenString := strings.Split(header[0], " ")
 	if len(tokenString) != 2 {
-		return 0, errors.New("invalid header format")
+		return response.Authentication{}, errors.New("invalid header format")
 	}
 
 	token, err := jwt.Parse(tokenString[1], func(t *jwt.Token) (interface{}, error) {
@@ -26,34 +27,34 @@ func Validate(r *http.Request, roles []string) (uint, error) {
 	})
 
 	if err != nil || !token.Valid {
-		return 0, err
+		return response.Authentication{}, err
 	}
 
 	claims := token.Claims.(jwt.MapClaims)
 
 	exp, ok := claims["exp"].(float64)
 	if !ok {
-		return 0, errors.New("exp parsing error")
+		return response.Authentication{}, errors.New("exp parsing error")
 	}
 	if time.Now().Unix() > int64(exp) {
-		return 0, errors.New("token expired")
+		return response.Authentication{}, errors.New("token expired")
 	}
 
 	role, ok := claims["role"].(string)
 	if !ok {
-		return 0, errors.New("role parsing error")
+		return response.Authentication{}, errors.New("role parsing error")
 	}
 
 	accId, ok := claims["id"].(float64)
 	if !ok {
-		return 0, errors.New("acc parsing error")
+		return response.Authentication{}, errors.New("acc parsing error")
 	}
 
 	if !roleInRoles(role, roles) {
-		return 0, errors.New("forbidden")
+		return response.Authentication{}, errors.New("forbidden")
 	}
 
-	return uint(accId), nil
+	return response.Authentication{Id: uint(accId), Role: role}, nil
 }
 
 func roleInRoles(role string, roles []string) bool {

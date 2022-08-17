@@ -19,3 +19,8 @@ type UserInfo struct {
 type Jwt struct {
 	Token string `json:"Token"`
 }
+
+type Authentication struct {
+	Id   uint   `json:"Id"`
+	Role string `json:"Role"`
+}

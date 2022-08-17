@@ -55,7 +55,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request, url string) {
 		return
 	}
 
-	req, _ := http.NewRequest(http.MethodPost, url, r.Body)
+	req, _ := http.NewRequest(r.Method, url, r.Body)
 	req.Header.Set("Accept", "application/json")
 	client := &http.Client{}
 	res, err := client.Do(req)

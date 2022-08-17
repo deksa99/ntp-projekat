@@ -92,25 +92,20 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func ChangePassword(w http.ResponseWriter, r *http.Request) {
-	roles := []string{"user", "admin", "worker"}
-	accId, err := auth.Validate(r, roles)
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
 
 	w.Header().Set("Content-Type", "application/json")
 
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusForbidden)
-		return
-	}
-
 	var changePassword request.ChangePassword
 
-	err = helper.DecodeJSONBody(w, r, &changePassword)
+	err := helper.DecodeJSONBody(w, r, &changePassword)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	err = service.ChangePassword(accId, changePassword.Password, changePassword.NewPassword)
+	err = service.ChangePassword(uint(id), changePassword.Password, changePassword.NewPassword)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
@@ -173,5 +168,26 @@ func BlockUser(w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		w.WriteHeader(http.StatusOK)
+	}
+}
+
+func Authenticate(w http.ResponseWriter, r *http.Request) {
+	var authRequest request.Authenticate
+
+	err := helper.DecodeJSONBody(w, r, &authRequest)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	authRes, err := auth.Validate(r, authRequest.Roles)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusForbidden)
+		return
+	}
+	err = json.NewEncoder(w).Encode(authRes)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
 }

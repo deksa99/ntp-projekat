@@ -17,3 +17,7 @@ type ChangePassword struct {
 	Password    string `json:"Password"`
 	NewPassword string `json:"NewPassword"`
 }
+
+type Authenticate struct {
+	Roles []string `json:"Roles"`
+}
