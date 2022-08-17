@@ -1,8 +1,9 @@
 package model
 
 type AuthenticatedUser struct {
-	Id   uint   `json:"Id"`
-	Role string `json:"Role"`
+	AccId  uint   `json:"AccId"`
+	UserId uint   `json:"UserId"`
+	Role   string `json:"Role"`
 }
 
 type Roles struct {

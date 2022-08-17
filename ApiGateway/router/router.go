@@ -18,5 +18,10 @@ func HandleRequests() {
 	router.HandleFunc("/users", handler.GetAllUsers).Methods("GET", "OPTIONS")
 	router.HandleFunc("/users/{id}/block", handler.BlockUser).Methods("PATCH", "OPTIONS")
 
+	//Vehicle service
+	router.HandleFunc("/vehicles", handler.AddVehicle).Methods("POST", "OPTIONS")
+	router.HandleFunc("/vehicles/{vehicleId}", handler.UpdateVehicle).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/vehicles", handler.GetVehiclesForUser).Methods("GET", "OPTIONS")
+
 	log.Fatal(http.ListenAndServe(":8090", router))
 }

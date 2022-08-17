@@ -21,6 +21,7 @@ type Jwt struct {
 }
 
 type Authentication struct {
-	Id   uint   `json:"Id"`
-	Role string `json:"Role"`
+	AccId  uint   `json:"AccId"`
+	UserId uint   `json:"UserId"`
+	Role   string `json:"Role"`
 }

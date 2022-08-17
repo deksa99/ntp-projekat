@@ -50,11 +50,16 @@ func Validate(r *http.Request, roles []string) (response.Authentication, error) 
 		return response.Authentication{}, errors.New("acc parsing error")
 	}
 
+	userId, ok := claims["user_id"].(float64)
+	if !ok {
+		return response.Authentication{}, errors.New("user parsing error")
+	}
+
 	if !roleInRoles(role, roles) {
 		return response.Authentication{}, errors.New("forbidden")
 	}
 
-	return response.Authentication{Id: uint(accId), Role: role}, nil
+	return response.Authentication{AccId: uint(accId), UserId: uint(userId), Role: role}, nil
 }
 
 func roleInRoles(role string, roles []string) bool {

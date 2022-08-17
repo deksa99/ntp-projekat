@@ -56,29 +56,29 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 	switch role {
 	case "user":
 		{
-			_, err := repository.FindUserByAccountID(acc.ID)
+			u, err := repository.FindUserByAccountID(acc.ID)
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "user"), nil
+				return createJwt(acc, "user", u.ID), nil
 			}
 		}
 	case "admin":
 		{
-			_, err := repository.FindAdminByAccountID(acc.ID)
+			a, err := repository.FindAdminByAccountID(acc.ID)
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "admin"), nil
+				return createJwt(acc, "admin", a.ID), nil
 			}
 		}
 	case "worker":
 		{
-			_, err := repository.FindWorkerByAccountID(acc.ID)
+			w, err := repository.FindWorkerByAccountID(acc.ID)
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "worker"), nil
+				return createJwt(acc, "worker", w.ID), nil
 			}
 		}
 	default:
@@ -86,7 +86,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 	}
 }
 
-func createJwt(acc model.Account, role string) response.Jwt {
+func createJwt(acc model.Account, role string, userId uint) response.Jwt {
 
 	jwtKey := []byte(os.Getenv("JWT_KEY"))
 
@@ -97,6 +97,7 @@ func createJwt(acc model.Account, role string) response.Jwt {
 	claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 	claims["role"] = role
 	claims["id"] = acc.ID
+	claims["user_id"] = userId
 
 	token.Claims = claims
 
