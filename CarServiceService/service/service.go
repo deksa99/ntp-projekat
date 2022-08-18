@@ -53,3 +53,22 @@ func FindNearestService(lat float64, lon float64) (model.CarService, error) {
 		return service, nil
 	}
 }
+
+func CreateService(carServiceId uint, name string, description string, price float32, expectedTIme uint) (response.ServiceInfo, error) {
+	service := model.Service{
+		Name:         name,
+		Description:  description,
+		Price:        price,
+		ExpectedTime: expectedTIme,
+		Available:    true,
+		CarServiceID: carServiceId,
+	}
+
+	newService, err := repository.Save(service)
+
+	if err != nil {
+		return response.ServiceInfo{}, err
+	} else {
+		return converter.ServiceToServiceInfo(&newService), nil
+	}
+}

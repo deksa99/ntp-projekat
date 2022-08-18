@@ -45,3 +45,13 @@ func FindServiceForLocation(lId uint) (model.CarService, error) {
 
 	return carService, nil
 }
+
+func Save(service model.Service) (model.Service, error) {
+	newVehicle := database.Db.Save(&service)
+
+	if newVehicle.Error != nil {
+		return service, newVehicle.Error
+	}
+
+	return service, nil
+}
