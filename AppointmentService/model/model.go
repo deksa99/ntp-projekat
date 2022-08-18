@@ -54,10 +54,10 @@ type AppointmentRequest struct {
 	ServiceID      uint          `gorm:"not null;default:null"`
 	ServiceName    string        `gorm:"not null;default:null"`
 	ServicePrice   float32       `gorm:"not null;default:null"`
+	Available      bool          `gorm:"not null;default:false"`
 	CarServiceID   uint          `gorm:"not null;default:null"`
 	CarServiceName string        `gorm:"not null;default:null"`
 	Street         string        `gorm:"default:null"`
-	Available      bool          `gorm:"not null;default:false"`
 	Status         RequestStatus `sql:"type:request_status"`
 	SubmittedAt    time.Time     `gorm:"not null;default:null"`
 }
