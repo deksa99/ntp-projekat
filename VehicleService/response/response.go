@@ -13,6 +13,7 @@ func (e *Error) Error() string {
 
 type VehicleInfo struct {
 	Id            uint               `json:"Id"`
+	UserId        uint               `json:"UserId"`
 	Manufacturer  model.Manufacturer `json:"Manufacturer"`
 	CarModel      string             `json:"CarModel"`
 	Color         string             `json:"Color"`

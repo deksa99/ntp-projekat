@@ -20,6 +20,18 @@ func FindVehiclesForUser(userId uint) ([]response.VehicleInfo, error) {
 	return vehicleInfos, nil
 }
 
+func FindVehicleById(id uint) (response.VehicleInfo, error) {
+	vehicle, err := repository.GetVehicleById(id)
+
+	if err != nil {
+		return response.VehicleInfo{}, err
+	}
+
+	vehicleInfo := converter.VehicleToVehicleInfo(&vehicle)
+
+	return vehicleInfo, nil
+}
+
 func AddVehicle(userId uint, manufacturer model.Manufacturer, carModel string, color string, licencePlate string, chassisNumber string) (model.Vehicle, error) {
 
 	vehicle := model.Vehicle{Color: color, CarModel: carModel, ChassisNumber: chassisNumber, LicencePlate: licencePlate, Manufacturer: manufacturer, UserID: userId}

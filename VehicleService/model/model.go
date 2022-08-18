@@ -1,20 +1,10 @@
 package model
 
 import (
-	"database/sql/driver"
 	"gorm.io/gorm"
 )
 
 type Manufacturer string
-
-func (m *Manufacturer) Scan(value interface{}) error {
-	*m = Manufacturer(value.([]byte))
-	return nil
-}
-
-func (m Manufacturer) Value() (driver.Value, error) {
-	return string(m), nil
-}
 
 const (
 	Toyota       Manufacturer = "Toyota"

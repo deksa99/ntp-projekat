@@ -19,9 +19,9 @@ func HandleRequests() {
 	router.HandleFunc("/users/{id}/block", handler.BlockUser).Methods("PATCH", "OPTIONS")
 
 	//Vehicle service
-	router.HandleFunc("/vehicles", handler.AddVehicle).Methods("POST", "OPTIONS")
+	router.HandleFunc("/vehicles/add", handler.AddVehicle).Methods("POST", "OPTIONS")
 	router.HandleFunc("/vehicles/{vehicleId}", handler.UpdateVehicle).Methods("PATCH", "OPTIONS")
-	router.HandleFunc("/vehicles", handler.GetVehiclesForUser).Methods("GET", "OPTIONS")
+	router.HandleFunc("/vehicles/all", handler.GetVehiclesForUser).Methods("GET", "OPTIONS")
 
 	//CarService service
 	router.HandleFunc("/car-services", handler.GetAllCarServices).Methods("GET", "OPTIONS")

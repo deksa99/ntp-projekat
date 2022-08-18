@@ -14,6 +14,26 @@ import (
 	"strconv"
 )
 
+func GetVehicle(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["vehicleId"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	vehicle, err := service.FindVehicleById(uint(id))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(vehicle)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
 func GetVehiclesForUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseUint(params["userId"], 10, 32)

@@ -15,7 +15,7 @@ func AddVehicle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	url := response.VehicleServiceRoundRobin.Next().Host + "/api/vehicles/" + strconv.FormatUint(uint64(resp.UserId), 10)
+	url := response.VehicleServiceRoundRobin.Next().Host + "/api/vehicles/add/" + strconv.FormatUint(uint64(resp.UserId), 10)
 	response.HandleRequest(w, r, url)
 }
 
@@ -41,6 +41,6 @@ func GetVehiclesForUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	url := response.VehicleServiceRoundRobin.Next().Host + "/api/vehicles/" + strconv.FormatUint(uint64(resp.UserId), 10)
+	url := response.VehicleServiceRoundRobin.Next().Host + "/api/vehicles/all/" + strconv.FormatUint(uint64(resp.UserId), 10)
 	response.HandleRequest(w, r, url)
 }
