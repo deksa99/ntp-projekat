@@ -88,3 +88,17 @@ func UpdateService(id uint, name string, description string, expectedTIme uint) 
 		return converter.ServiceToServiceInfo(&newService), nil
 	}
 }
+
+func ChangeServiceAvailability(id uint) (response.ServiceInfo, error) {
+	service, err := repository.FindServiceById(id)
+
+	service.Available = !service.Available
+
+	newService, err := repository.SaveService(service)
+
+	if err != nil {
+		return response.ServiceInfo{}, err
+	} else {
+		return converter.ServiceToServiceInfo(&newService), nil
+	}
+}

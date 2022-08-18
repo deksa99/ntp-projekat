@@ -152,7 +152,26 @@ func UpdateService(w http.ResponseWriter, r *http.Request) {
 }
 
 func ChangeAvailability(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	updatedService, err := service.ChangeServiceAvailability(uint(id))
+
+	if err != nil {
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(updatedService)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func CreateCarService(w http.ResponseWriter, r *http.Request) {
