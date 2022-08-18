@@ -25,11 +25,13 @@ type User struct {
 
 type ServiceWorker struct {
 	gorm.Model
-	FirstName string `gorm:"not null;default:null;size:256"`
-	LastName  string `gorm:"not null;default:null;size:256"`
-	Main      bool
-	AccountID uint
-	Account   Account `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	FirstName    string `gorm:"not null;default:null;size:256"`
+	LastName     string `gorm:"not null;default:null;size:256"`
+	Email        string `gorm:"not null;default:null;unique"`
+	Main         bool   `gorm:"not null;default:false"`
+	CarServiceID uint   `gorm:"not null;default:null"`
+	AccountID    uint
+	Account      Account `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }
 
 type Admin struct {
