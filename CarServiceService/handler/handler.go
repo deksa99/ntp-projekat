@@ -117,7 +117,38 @@ func CreateService(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateService(w http.ResponseWriter, r *http.Request) {
+	var us request.UpdateService
 
+	err := helper.DecodeJSONBody(w, r, &us)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		var e *response.Error
+		if errors.As(err, &e) {
+			http.Error(w, e.Message, e.Status)
+		} else {
+			log.Print(err.Error())
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	updatedService, err := service.UpdateService(us.Id, us.Name, us.Description, us.ExpectedTime)
+
+	if err != nil {
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(updatedService)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func ChangeAvailability(w http.ResponseWriter, r *http.Request) {

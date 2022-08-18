@@ -34,7 +34,7 @@ func FindLocations() []model.Location {
 	return locations
 }
 
-func FindServiceForLocation(lId uint) (model.CarService, error) {
+func FindCarServiceForLocation(lId uint) (model.CarService, error) {
 	var carService model.CarService
 
 	database.Db.Preload("Location").Table("car_services").Where("location_id = ?", lId).First(&carService)
@@ -46,11 +46,23 @@ func FindServiceForLocation(lId uint) (model.CarService, error) {
 	return carService, nil
 }
 
-func Save(service model.Service) (model.Service, error) {
+func SaveService(service model.Service) (model.Service, error) {
 	newVehicle := database.Db.Save(&service)
 
 	if newVehicle.Error != nil {
 		return service, newVehicle.Error
+	}
+
+	return service, nil
+}
+
+func FindServiceById(id uint) (model.Service, error) {
+	var service model.Service
+
+	database.Db.Table("services").Where("id = ?", id).First(&service)
+
+	if service.ID == 0 {
+		return service, errors.New("service not found")
 	}
 
 	return service, nil

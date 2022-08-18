@@ -14,8 +14,10 @@ type CreateService struct {
 }
 
 type UpdateService struct {
-	Name        string `json:"Name"`
-	Description string `json:"Description"`
+	Id           uint   `json:"Id"`
+	Name         string `json:"Name"`
+	Description  string `json:"Description"`
+	ExpectedTime uint   `json:"ExpectedTime"`
 }
 
 type CreateCarService struct {
