@@ -30,22 +30,23 @@ func (m AppointmentStatus) Value() (driver.Value, error) {
 
 const (
 	Submitted RequestStatus = "Submitted"
-	Accepted                = "Accepted"
-	Rejected                = "Rejected"
+	Accepted  RequestStatus = "Accepted"
+	Rejected  RequestStatus = "Rejected"
 )
 
 const (
 	Scheduled AppointmentStatus = "Scheduled"
-	Cancelled                   = "Cancelled"
-	Finished                    = "Finished"
+	Cancelled AppointmentStatus = "Cancelled"
+	Finished  AppointmentStatus = "Finished"
 )
 
 type AppointmentRequest struct {
 	gorm.Model
-	UserID    uint          `gorm:"not null;default:null"`
-	VehicleID uint          `gorm:"not null;default:null"`
-	ServiceID uint          `gorm:"not null;default:null"`
-	Status    RequestStatus `sql:"type:request_status"`
+	UserID      uint          `gorm:"not null;default:null"`
+	VehicleID   uint          `gorm:"not null;default:null"`
+	ServiceID   uint          `gorm:"not null;default:null"`
+	Status      RequestStatus `sql:"type:request_status"`
+	SubmittedAt time.Time     `gorm:"not null;default:null"`
 }
 
 type Appointment struct {
