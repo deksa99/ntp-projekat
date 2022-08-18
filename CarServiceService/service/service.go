@@ -102,3 +102,24 @@ func ChangeServiceAvailability(id uint) (response.ServiceInfo, error) {
 		return converter.ServiceToServiceInfo(&newService), nil
 	}
 }
+
+func CreateCarService(name string, latitude float64, longitude float64, street string) (response.CarServiceInfo, error) {
+	location := model.Location{
+		Latitude:  latitude,
+		Longitude: longitude,
+		Street:    street,
+	}
+
+	carService := model.CarService{
+		Name:     name,
+		Location: location,
+	}
+
+	newCarService, err := repository.SaveCarService(carService)
+
+	if err != nil {
+		return response.CarServiceInfo{}, err
+	} else {
+		return converter.CarServiceToCarServiceInfo(&newCarService), nil
+	}
+}
