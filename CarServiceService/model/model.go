@@ -14,6 +14,7 @@ type CarService struct {
 	Name       string `gorm:"not null;default:null;size:256"`
 	LocationID uint
 	Location   Location `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	Services   []Service
 }
 
 type Service struct {
@@ -22,7 +23,7 @@ type Service struct {
 	Description  string  `gorm:"not null;default:null;size:1028"`
 	Price        float32 `gorm:"not null;default:null"`
 	ExpectedTime uint    `gorm:"default:null"`
-	Available    bool    `gorm:"not null;default true"`
+	Available    bool    `gorm:"not null;default:true"`
 	CarServiceID uint
 	CarService   CarService `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }

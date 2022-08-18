@@ -14,3 +14,15 @@ func CarServiceToCarServiceInfo(carService *model.CarService) response.CarServic
 		Street:    carService.Location.Street,
 	}
 }
+
+func ServiceToServiceInfo(service *model.Service) response.ServiceInfo {
+	return response.ServiceInfo{
+		Id:           service.ID,
+		Name:         service.Name,
+		Price:        service.Price,
+		Description:  service.Description,
+		ExpectedTime: service.ExpectedTime,
+		Available:    service.Available,
+		CarServiceID: service.CarServiceID,
+	}
+}

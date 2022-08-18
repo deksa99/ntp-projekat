@@ -17,3 +17,19 @@ func FindAllCarServices() []response.CarServiceInfo {
 
 	return serviceInfos
 }
+
+func GetServicesForCarService(carServiceId uint) ([]response.ServiceInfo, error) {
+	services, err := repository.FindServicesForCarService(carServiceId)
+
+	if err != nil {
+		return []response.ServiceInfo{}, err
+	}
+
+	var serviceInfos []response.ServiceInfo
+
+	for _, s := range services {
+		serviceInfos = append(serviceInfos, converter.ServiceToServiceInfo(&s))
+	}
+
+	return serviceInfos, nil
+}
