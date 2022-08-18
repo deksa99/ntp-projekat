@@ -15,6 +15,10 @@ var VehicleServiceRoundRobin, _ = rr.New(
 	&url.URL{Host: "http://localhost:8082"},
 )
 
+var CarServiceServiceRoundRobin, _ = rr.New(
+	&url.URL{Host: "http://localhost:8083"},
+)
+
 func DelegateResponse(response *http.Response, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", response.Header.Get("Content-Type"))
 	w.Header().Set("Content-Length", response.Header.Get("Content-Length"))

@@ -23,5 +23,14 @@ func HandleRequests() {
 	router.HandleFunc("/vehicles/{vehicleId}", handler.UpdateVehicle).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/vehicles", handler.GetVehiclesForUser).Methods("GET", "OPTIONS")
 
+	//CarService service
+	router.HandleFunc("/car-services", handler.GetAllCarServices).Methods("GET", "OPTIONS")
+	router.HandleFunc("/car-services", handler.CreateCarService).Methods("POST", "OPTIONS")
+	router.HandleFunc("/car-services/near-me", handler.FindNearest).Methods("POST", "OPTIONS")
+	router.HandleFunc("/car-services/service", handler.CreateService).Methods("POST", "OPTIONS")
+	router.HandleFunc("/car-services/service", handler.UpdateService).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/car-services/service/{id}/change-availability", handler.ChangeAvailability).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/car-services/{id}/catalog", handler.GetCatalog).Methods("GET", "OPTIONS")
+
 	log.Fatal(http.ListenAndServe(":8090", router))
 }
