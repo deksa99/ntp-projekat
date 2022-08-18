@@ -1,9 +1,15 @@
 package handler
 
 import (
+	"CarServiceService/request"
+	"CarServiceService/response"
 	"CarServiceService/service"
+	"CarServiceService/util/converter"
+	"CarServiceService/util/helper"
 	"encoding/json"
+	"errors"
 	"github.com/gorilla/mux"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -41,7 +47,38 @@ func GetCatalog(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindNearest(w http.ResponseWriter, r *http.Request) {
+	var myLocation request.Location
 
+	err := helper.DecodeJSONBody(w, r, &myLocation)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		var e *response.Error
+		if errors.As(err, &e) {
+			http.Error(w, e.Message, e.Status)
+		} else {
+			log.Print(err.Error())
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	carService, err := service.FindNearestService(myLocation.Latitude, myLocation.Longitude)
+
+	if err != nil {
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(converter.CarServiceToCarServiceInfo(&carService))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func CreateService(w http.ResponseWriter, r *http.Request) {

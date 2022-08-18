@@ -1,9 +1,11 @@
 package service
 
 import (
+	"CarServiceService/model"
 	"CarServiceService/repository"
 	"CarServiceService/response"
 	"CarServiceService/util/converter"
+	"CarServiceService/util/helper"
 )
 
 func FindAllCarServices() []response.CarServiceInfo {
@@ -32,4 +34,22 @@ func GetServicesForCarService(carServiceId uint) ([]response.ServiceInfo, error)
 	}
 
 	return serviceInfos, nil
+}
+
+func FindNearestService(lat float64, lon float64) (model.CarService, error) {
+	locations := repository.FindLocations()
+
+	n, err := helper.Nearest(lat, lon, locations)
+
+	if err != nil {
+		return model.CarService{}, err
+	}
+
+	service, err := repository.FindServiceForLocation(n.ID)
+
+	if err != nil {
+		return model.CarService{}, err
+	} else {
+		return service, nil
+	}
 }
