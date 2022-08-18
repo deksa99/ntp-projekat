@@ -77,3 +77,22 @@ func getCarService(id uint) (CarServiceInfo, error) {
 		return carService, nil
 	}
 }
+
+func getService(id uint) (ServiceInfo, error) {
+	response, err := http.Get(carServiceServiceBasePath.Next().Host + "/api/car-services/service/" + strconv.FormatUint(uint64(id), 10))
+
+	if err != nil {
+		return ServiceInfo{}, err
+	}
+	if response.StatusCode != 200 {
+		return ServiceInfo{}, errors.New("vehicle not found")
+	}
+
+	var service ServiceInfo
+	err = json.NewDecoder(response.Body).Decode(&service)
+	if err != nil {
+		return ServiceInfo{}, err
+	} else {
+		return service, nil
+	}
+}

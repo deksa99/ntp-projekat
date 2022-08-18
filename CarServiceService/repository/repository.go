@@ -14,6 +14,17 @@ func FindCarServices() []model.CarService {
 	return carServices
 }
 
+func FindCarServiceById(id uint) (model.CarService, error) {
+	var carService model.CarService
+
+	database.Db.Preload("Location").Table("car_services").Where("id = ?", id).First(&carService)
+
+	if carService.ID == 0 {
+		return carService, errors.New("car service not found")
+	}
+	return carService, nil
+}
+
 func FindServicesForCarService(carServiceId uint) ([]model.Service, error) {
 	var carService model.CarService
 

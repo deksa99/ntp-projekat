@@ -10,6 +10,8 @@ import (
 func HandleRequests() {
 	router := mux.NewRouter().PathPrefix("/api/car-services").Subrouter()
 
+	router.HandleFunc("/{id}", handler.GetCarService).Methods("GET")
+	router.HandleFunc("/service/{id}", handler.GetService).Methods("GET")
 	router.HandleFunc("", handler.GetAllCarServices).Methods("GET")
 	router.HandleFunc("", handler.CreateCarService).Methods("POST")
 	router.HandleFunc("/near-me", handler.FindNearest).Methods("POST")

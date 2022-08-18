@@ -14,6 +14,46 @@ import (
 	"strconv"
 )
 
+func GetCarService(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	carService, err := service.GetCarService(uint(id))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(carService)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
+func GetService(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	service, err := service.GetService(uint(id))
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+
+	err = json.NewEncoder(w).Encode(service)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+}
+
 func GetAllCarServices(w http.ResponseWriter, r *http.Request) {
 	services := service.FindAllCarServices()
 

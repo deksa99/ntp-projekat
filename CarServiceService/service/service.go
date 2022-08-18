@@ -8,6 +8,28 @@ import (
 	"CarServiceService/util/helper"
 )
 
+func GetCarService(id uint) (response.CarServiceInfo, error) {
+	carService, err := repository.FindCarServiceById(id)
+
+	if err != nil {
+		return response.CarServiceInfo{}, err
+	}
+
+	carServiceInfo := converter.CarServiceToCarServiceInfo(&carService)
+	return carServiceInfo, nil
+}
+
+func GetService(id uint) (response.ServiceInfo, error) {
+	service, err := repository.FindServiceById(id)
+
+	if err != nil {
+		return response.ServiceInfo{}, err
+	}
+
+	serviceInfo := converter.ServiceToServiceInfo(&service)
+	return serviceInfo, nil
+}
+
 func FindAllCarServices() []response.CarServiceInfo {
 	services := repository.FindCarServices()
 
