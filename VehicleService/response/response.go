@@ -17,6 +17,6 @@ type VehicleInfo struct {
 	Manufacturer  model.Manufacturer `json:"Manufacturer"`
 	CarModel      string             `json:"CarModel"`
 	Color         string             `json:"Color"`
-	LicensePlate  string             `json:"LicensePlate"`
+	LicencePlate  string             `json:"LicencePlate"`
 	ChassisNumber string             `json:"ChassisNumber"`
 }

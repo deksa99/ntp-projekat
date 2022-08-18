@@ -21,7 +21,7 @@ var carServiceServiceBasePath, _ = rr.New(
 	&url.URL{Host: "http://localhost:8083"},
 )
 
-func getUserDetails(id uint) (UserInfo, error) {
+func GetUserDetails(id uint) (UserInfo, error) {
 	response, err := http.Get(userServiceBasePath.Next().Host + "/api/users/" + strconv.FormatUint(uint64(id), 10))
 
 	if err != nil {
@@ -40,7 +40,7 @@ func getUserDetails(id uint) (UserInfo, error) {
 	}
 }
 
-func getVehicleDetails(id uint) (VehicleInfo, error) {
+func GetVehicleDetails(id uint) (VehicleInfo, error) {
 	response, err := http.Get(vehicleServiceBasePath.Next().Host + "/api/vehicles/" + strconv.FormatUint(uint64(id), 10))
 
 	if err != nil {
@@ -59,7 +59,7 @@ func getVehicleDetails(id uint) (VehicleInfo, error) {
 	}
 }
 
-func getCarService(id uint) (CarServiceInfo, error) {
+func GetCarService(id uint) (CarServiceInfo, error) {
 	response, err := http.Get(carServiceServiceBasePath.Next().Host + "/api/car-services/" + strconv.FormatUint(uint64(id), 10))
 
 	if err != nil {
@@ -78,7 +78,7 @@ func getCarService(id uint) (CarServiceInfo, error) {
 	}
 }
 
-func getService(id uint) (ServiceInfo, error) {
+func GetService(id uint) (ServiceInfo, error) {
 	response, err := http.Get(carServiceServiceBasePath.Next().Host + "/api/car-services/service/" + strconv.FormatUint(uint64(id), 10))
 
 	if err != nil {
