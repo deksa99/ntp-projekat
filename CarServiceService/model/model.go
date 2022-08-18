@@ -6,7 +6,7 @@ type Location struct {
 	gorm.Model
 	Latitude  float64 `gorm:"not null;default:null"`
 	Longitude float64 `gorm:"not null;default:null"`
-	Name      string  `gorm:"default:null;size:256"`
+	Street    string  `gorm:"default:null;size:256"`
 }
 
 type CarService struct {

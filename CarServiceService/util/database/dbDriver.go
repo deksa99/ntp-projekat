@@ -10,16 +10,16 @@ import (
 
 var (
 	locations = []model.Location{
-		{Longitude: 19.8298413, Latitude: 45.2618498, Name: "Bulevar oslobođenja 21, Novi Sad"},
-		{Longitude: 19.8615368, Latitude: 45.2542202, Name: "Vladimira Nazora 2, Petrovaradin"},
-		{Longitude: 19.8480734, Latitude: 45.2421371, Name: "Veljka Petrovica 5, Novi Sad"},
-		{Longitude: 19.848706, Latitude: 45.2224511, Name: "Moše Pijade 17, Sremska Kamenica"},
+		{Longitude: 19.8298413, Latitude: 45.2618498, Street: "Bulevar oslobođenja 21, Novi Sad"},
+		{Longitude: 19.8615368, Latitude: 45.2542202, Street: "Vladimira Nazora 2, Petrovaradin"},
+		{Longitude: 19.8480734, Latitude: 45.2421371, Street: "Veljka Petrovica 5, Novi Sad"},
+		{Longitude: 19.848706, Latitude: 45.2224511, Street: "Moše Pijade 17, Sremska Kamenica"},
 	}
 	carServices = []model.CarService{
 		{Name: "Kvačilo", LocationID: 1},
-		{Name: "Mile i sin", LocationID: 1},
-		{Name: "Auto Servis Roki", LocationID: 1},
-		{Name: "Auto Servis Roki 2", LocationID: 1},
+		{Name: "Mile i sin", LocationID: 2},
+		{Name: "Auto Servis Roki", LocationID: 3},
+		{Name: "Auto Servis Roki 2", LocationID: 4},
 	}
 	services = []model.Service{
 		{Name: "Mali servis", Description: "Mali servis, velika briga. Prepustite je nama.", Price: 7300, ExpectedTime: 3, CarServiceID: 1},
