@@ -5,10 +5,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="UserService" />
-    <orderEntry type="module" module-name="VehicleService" />
-    <orderEntry type="module" module-name="CarServiceService" />
-    <orderEntry type="module" module-name="AppointmentService" />
-    <orderEntry type="module" module-name="ReviewService" />
   </component>
 </module>

@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/ApiGateway.iml" filepath="$PROJECT_DIR$/.idea/ApiGateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/../AppointmentService/.idea/AppointmentService.iml" filepath="$PROJECT_DIR$/../AppointmentService/.idea/AppointmentService.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CarServiceService/.idea/CarServiceService.iml" filepath="$PROJECT_DIR$/../CarServiceService/.idea/CarServiceService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ReviewService/.idea/ReviewService.iml" filepath="$PROJECT_DIR$/../ReviewService/.idea/ReviewService.iml" />
       <module fileurl="file://$PROJECT_DIR$/../UserService/.idea/UserService.iml" filepath="$PROJECT_DIR$/../UserService/.idea/UserService.iml" />
       <module fileurl="file://$PROJECT_DIR$/../VehicleService/.idea/VehicleService.iml" filepath="$PROJECT_DIR$/../VehicleService/.idea/VehicleService.iml" />
     </modules>
