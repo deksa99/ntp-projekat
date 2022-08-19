@@ -194,3 +194,30 @@ func RejectRequest(requestId uint, workerID uint) (response.AppointmentRequestIn
 		return converter.AppointmentRequestToAppointmentRequestInfo(&request), nil
 	}
 }
+
+func FinishCancelAppointment(appointmentId uint, workerID uint, status model.AppointmentStatus) (response.AppointmentInfo, error) {
+	worker, err := api.GetWorkerDetails(workerID)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+	appointment, err := repository.FindAppointmentById(appointmentId)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+
+	if appointment.Status != model.Scheduled {
+		return response.AppointmentInfo{}, errors.New("appointment has already been " + string(appointment.Status))
+	}
+
+	if worker.WorkerID != appointment.WorkerID {
+		return response.AppointmentInfo{}, errors.New("worker does not work here")
+	}
+
+	appointment.Status = status
+	updatedAppointment, err := repository.SaveAppointment(appointment)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	} else {
+		return converter.AppointmentToAppointmentInfo(&updatedAppointment), nil
+	}
+}

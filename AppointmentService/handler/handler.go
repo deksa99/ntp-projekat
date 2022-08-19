@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"AppointmentService/model"
 	"AppointmentService/request"
 	"AppointmentService/response"
 	"AppointmentService/service"
@@ -184,7 +185,34 @@ func RejectRequest(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	appointment, err := service.RejectRequest(uint(rId), uint(wId))
+	req, err := service.RejectRequest(uint(rId), uint(wId))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(req)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+}
+
+func FinishAppointment(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	aId, _ := strconv.ParseUint(params["appointmentId"], 10, 32)
+	wId, _ := strconv.ParseUint(params["workerId"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	appointment, err := service.FinishCancelAppointment(uint(aId), uint(wId), model.Finished)
+
+	// TODO mail notification
 
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -202,12 +230,31 @@ func RejectRequest(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func FinishAppointment(w http.ResponseWriter, r *http.Request) {
-
-}
-
 func CancelAppointment(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	aId, _ := strconv.ParseUint(params["appointmentId"], 10, 32)
+	wId, _ := strconv.ParseUint(params["workerId"], 10, 32)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	appointment, err := service.FinishCancelAppointment(uint(aId), uint(wId), model.CancelledAppointment)
+
+	// TODO mail notification
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(appointment)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func ShowNewRequestsForService(w http.ResponseWriter, r *http.Request) {

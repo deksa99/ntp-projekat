@@ -23,6 +23,8 @@ func SaveAppointment(appointment model.Appointment) (model.Appointment, error) {
 		return appointment, newAppointment.Error
 	}
 
+	database.Db.Preload("AppointmentRequest").First(&appointment, appointment.ID)
+
 	return appointment, nil
 }
 
@@ -35,6 +37,17 @@ func FindRequestById(requestId uint) (model.AppointmentRequest, error) {
 	}
 
 	return appRequest, nil
+}
+
+func FindAppointmentById(appointmentId uint) (model.Appointment, error) {
+	var app model.Appointment
+	database.Db.First(&app, appointmentId)
+
+	if app.ID == 0 {
+		return app, errors.New("appointment not found")
+	}
+
+	return app, nil
 }
 
 func GetRequestsForUser(id uint) []model.AppointmentRequest {
