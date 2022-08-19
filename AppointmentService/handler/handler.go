@@ -202,6 +202,14 @@ func RejectRequest(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func FinishAppointment(w http.ResponseWriter, r *http.Request) {
+
+}
+
+func CancelAppointment(w http.ResponseWriter, r *http.Request) {
+
+}
+
 func ShowNewRequestsForService(w http.ResponseWriter, r *http.Request) {
 
 }

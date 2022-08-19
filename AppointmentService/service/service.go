@@ -168,6 +168,29 @@ func AcceptRequest(requestId uint, workerID uint, start time.Time) (response.App
 	}
 }
 
-func RejectRequest(requestId uint, workerID uint) (response.AppointmentInfo, error) {
-	return response.AppointmentInfo{}, errors.New("not implemented")
+func RejectRequest(requestId uint, workerID uint) (response.AppointmentRequestInfo, error) {
+	worker, err := api.GetWorkerDetails(workerID)
+	if err != nil {
+		return response.AppointmentRequestInfo{}, err
+	}
+	request, err := repository.FindRequestById(requestId)
+	if err != nil {
+		return response.AppointmentRequestInfo{}, err
+	}
+
+	if request.Status != model.Submitted {
+		return response.AppointmentRequestInfo{}, errors.New("request has already been " + string(request.Status))
+	}
+
+	if worker.CarServiceID != request.CarServiceID {
+		return response.AppointmentRequestInfo{}, errors.New("worker does not work here")
+	}
+
+	request.Status = model.Rejected
+	_, err = repository.SaveRequest(request)
+	if err != nil {
+		return response.AppointmentRequestInfo{}, err
+	} else {
+		return converter.AppointmentRequestToAppointmentRequestInfo(&request), nil
+	}
 }
