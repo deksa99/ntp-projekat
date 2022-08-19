@@ -88,3 +88,19 @@ func CancelAppointmentRequest(userId uint, appointmentRequestId uint) (response.
 	}
 	return converter.AppointmentRequestToAppointmentRequestInfo(&cancelledRequest), nil
 }
+
+func GetRequestsForUser(id uint) ([]response.AppointmentRequestInfo, error) {
+	requests := repository.GetRequestsForUser(id)
+
+	var requestInfos []response.AppointmentRequestInfo
+
+	for _, r := range requests {
+		requestInfos = append(requestInfos, converter.AppointmentRequestToAppointmentRequestInfo(&r))
+	}
+
+	if requestInfos == nil {
+		return []response.AppointmentRequestInfo{}, nil
+	}
+
+	return requestInfos, nil
+}

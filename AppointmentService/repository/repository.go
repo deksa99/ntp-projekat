@@ -26,3 +26,10 @@ func FindRequestById(requestId uint) (model.AppointmentRequest, error) {
 
 	return appRequest, nil
 }
+
+func GetRequestsForUser(id uint) []model.AppointmentRequest {
+	var appRequests []model.AppointmentRequest
+	database.Db.Where("user_id = ?", id).Find(&appRequests)
+
+	return appRequests
+}

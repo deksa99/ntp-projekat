@@ -90,7 +90,27 @@ func CancelRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetRequestsForUser(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["userId"], 10, 32)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	requests, err := service.GetRequestsForUser(uint(id))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(requests)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func GetAppointmentsForUser(w http.ResponseWriter, r *http.Request) {
