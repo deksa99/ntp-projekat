@@ -1,5 +1,7 @@
 package request
 
+import "time"
+
 type CreateAppointmentRequest struct {
 	UserID       uint `json:"UserID"`
 	VehicleID    uint `json:"VehicleID"`
@@ -10,4 +12,8 @@ type CreateAppointmentRequest struct {
 type CancelAppointmentRequest struct {
 	UserID               uint `json:"UserID"`
 	AppointmentRequestID uint `json:"AppointmentRequestID"`
+}
+
+type AcceptAppointmentRequest struct {
+	Start time.Time `json:"Start"`
 }

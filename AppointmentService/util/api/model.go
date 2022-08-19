@@ -7,6 +7,13 @@ type UserInfo struct {
 	Email     string `json:"Email"`
 }
 
+type WorkerInfo struct {
+	WorkerID     uint   `json:"ID"`
+	FirstName    string `json:"FirstName"`
+	LastName     string `json:"LastName"`
+	CarServiceID uint   `json:"CarServiceID"`
+}
+
 type VehicleInfo struct {
 	VehicleID     uint   `json:"ID"`
 	Manufacturer  string `json:"Manufacturer"`

@@ -48,6 +48,9 @@ type Appointment struct {
 	gorm.Model
 	AppointmentRequestID uint
 	AppointmentRequest   AppointmentRequest `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	WorkerID             uint               `gorm:"not null;default:null"`
+	FirstName            string             `gorm:"not null;default:null"`
+	LastName             string             `gorm:"not null;default:null"`
 	StartTime            time.Time          `gorm:"not null;default:null"`
 	FinishTime           time.Time          `gorm:"default:null"`
 	Status               AppointmentStatus  `sql:"type:appointment_status"`

@@ -16,6 +16,13 @@ type UserInfo struct {
 	LastName  string `json:"LastName"`
 }
 
+type WorkerInfo struct {
+	WorkerID     uint   `json:"ID"`
+	FirstName    string `json:"FirstName"`
+	LastName     string `json:"LastName"`
+	CarServiceID uint   `json:"CarServiceID"`
+}
+
 type Jwt struct {
 	Token string `json:"Token"`
 }

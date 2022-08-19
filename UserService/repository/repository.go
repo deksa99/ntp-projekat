@@ -80,6 +80,18 @@ func FindUserById(id uint) (model.User, error) {
 	return user, nil
 }
 
+func FindWorkerById(id uint) (model.ServiceWorker, error) {
+	var worker model.ServiceWorker
+
+	database.Db.First(&worker, id)
+
+	if worker.ID == 0 {
+		return worker, errors.New("worker not found")
+	}
+
+	return worker, nil
+}
+
 func FindAdminByAccountID(accountId uint) (model.Admin, error) {
 	var admin model.Admin
 

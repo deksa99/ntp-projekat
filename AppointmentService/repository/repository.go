@@ -16,6 +16,16 @@ func SaveRequest(request model.AppointmentRequest) (model.AppointmentRequest, er
 	return request, nil
 }
 
+func SaveAppointment(appointment model.Appointment) (model.Appointment, error) {
+	newAppointment := database.Db.Save(&appointment)
+
+	if newAppointment.Error != nil {
+		return appointment, newAppointment.Error
+	}
+
+	return appointment, nil
+}
+
 func FindRequestById(requestId uint) (model.AppointmentRequest, error) {
 	var appRequest model.AppointmentRequest
 	database.Db.First(&appRequest, requestId)

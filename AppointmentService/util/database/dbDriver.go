@@ -98,14 +98,14 @@ var (
 			Status: model.Rejected, SubmittedAt: time.Date(2022, 8, 15, 9, 40, 31, 0, time.Local)},
 	}
 	appointments = []model.Appointment{
-		{AppointmentRequestID: 3, StartTime: time.Date(2022, 7, 15, 10, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 7, 16, 14, 34, 44, 0, time.Local), Status: model.Finished},
-		{AppointmentRequestID: 4, StartTime: time.Date(2022, 7, 20, 10, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 7, 23, 15, 27, 49, 0, time.Local), Status: model.Finished},
+		{AppointmentRequestID: 3, WorkerID: 3, FirstName: "Pera", LastName: "Perić", StartTime: time.Date(2022, 7, 15, 10, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 7, 16, 14, 34, 44, 0, time.Local), Status: model.Finished},
+		{AppointmentRequestID: 4, WorkerID: 4, FirstName: "Gaša", LastName: "Gašić", StartTime: time.Date(2022, 7, 20, 10, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 7, 23, 15, 27, 49, 0, time.Local), Status: model.Finished},
 
-		{AppointmentRequestID: 7, StartTime: time.Date(2022, 7, 29, 12, 30, 0, 0, time.Local), FinishTime: time.Date(2022, 8, 1, 12, 30, 27, 0, time.Local), Status: model.Finished},
-		{AppointmentRequestID: 8, StartTime: time.Date(2022, 8, 25, 15, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
-		{AppointmentRequestID: 9, StartTime: time.Date(2022, 8, 16, 14, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.CancelledAppointment},
+		{AppointmentRequestID: 7, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 7, 29, 12, 30, 0, 0, time.Local), FinishTime: time.Date(2022, 8, 1, 12, 30, 27, 0, time.Local), Status: model.Finished},
+		{AppointmentRequestID: 8, WorkerID: 2, FirstName: "Raša", LastName: "Rašić", StartTime: time.Date(2022, 8, 25, 15, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
+		{AppointmentRequestID: 9, WorkerID: 1, FirstName: "Ivan", LastName: "Ivanovic", StartTime: time.Date(2022, 8, 16, 14, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.CancelledAppointment},
 
-		{AppointmentRequestID: 11, StartTime: time.Date(2022, 8, 26, 9, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
+		{AppointmentRequestID: 11, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 8, 26, 9, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
 	}
 )
 

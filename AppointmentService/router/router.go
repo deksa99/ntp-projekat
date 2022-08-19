@@ -14,7 +14,8 @@ func HandleRequests() {
 	router.HandleFunc("/requests/{userId}/cancel", handler.CancelRequest).Methods("PATCH")
 	router.HandleFunc("/requests/{userId}", handler.GetRequestsForUser).Methods("GET")
 	router.HandleFunc("/{userId}", handler.GetAppointmentsForUser).Methods("GET")
-	router.HandleFunc("/requests/{requestId}/accept", handler.CreateAppointment).Methods("PATCH")
+	router.HandleFunc("/requests/{requestId}/{workerId}/accept", handler.AcceptRequest).Methods("PATCH")
+	router.HandleFunc("/requests/{requestId}/{workerId}/reject", handler.RejectRequest).Methods("PATCH")
 	router.HandleFunc("/requests/service/{serviceId}", handler.ShowNewRequestsForService).Methods("GET")
 	router.HandleFunc("/worker/{workerId}", handler.ShowAppointmentsForWorker).Methods("GET")
 

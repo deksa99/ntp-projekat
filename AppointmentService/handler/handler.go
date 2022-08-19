@@ -137,8 +137,69 @@ func GetAppointmentsForUser(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func CreateAppointment(w http.ResponseWriter, r *http.Request) {
+func AcceptRequest(w http.ResponseWriter, r *http.Request) {
+	var acc request.AcceptAppointmentRequest
 
+	err := helper.DecodeJSONBody(w, r, &acc)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		var e *response.Error
+		if errors.As(err, &e) {
+			http.Error(w, e.Message, e.Status)
+		} else {
+			log.Print(err.Error())
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	params := mux.Vars(r)
+	rId, _ := strconv.ParseUint(params["requestId"], 10, 32)
+	wId, _ := strconv.ParseUint(params["workerId"], 10, 32)
+
+	appointment, err := service.AcceptRequest(uint(rId), uint(wId), acc.Start)
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(appointment)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+}
+
+func RejectRequest(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	rId, _ := strconv.ParseUint(params["requestId"], 10, 32)
+	wId, _ := strconv.ParseUint(params["workerId"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	appointment, err := service.RejectRequest(uint(rId), uint(wId))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(appointment)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func ShowNewRequestsForService(w http.ResponseWriter, r *http.Request) {

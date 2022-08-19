@@ -124,3 +124,50 @@ func GetAppointmentsForUser(id uint) ([]response.AppointmentInfo, error) {
 
 	return requestInfos, nil
 }
+
+func AcceptRequest(requestId uint, workerID uint, start time.Time) (response.AppointmentInfo, error) {
+	worker, err := api.GetWorkerDetails(workerID)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+	request, err := repository.FindRequestById(requestId)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+
+	if request.Status != model.Submitted {
+		return response.AppointmentInfo{}, errors.New("request has already been " + string(request.Status))
+	}
+
+	if worker.CarServiceID != request.CarServiceID {
+		return response.AppointmentInfo{}, errors.New("worker does not work here")
+	}
+
+	appointment := model.Appointment{
+		AppointmentRequestID: request.ID,
+		WorkerID:             worker.WorkerID,
+		FirstName:            worker.FirstName,
+		LastName:             worker.LastName,
+		StartTime:            start,
+		FinishTime:           time.Time{},
+		Status:               model.Scheduled,
+	}
+
+	request.Status = model.Accepted
+	_, err = repository.SaveRequest(request)
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+
+	newAppointment, err := repository.SaveAppointment(appointment)
+	newAppointment.AppointmentRequest = request
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	} else {
+		return converter.AppointmentToAppointmentInfo(&newAppointment), nil
+	}
+}
+
+func RejectRequest(requestId uint, workerID uint) (response.AppointmentInfo, error) {
+	return response.AppointmentInfo{}, errors.New("not implemented")
+}

@@ -40,6 +40,25 @@ func GetUserDetails(id uint) (UserInfo, error) {
 	}
 }
 
+func GetWorkerDetails(id uint) (WorkerInfo, error) {
+	response, err := http.Get(userServiceBasePath.Next().Host + "/api/users/worker/" + strconv.FormatUint(uint64(id), 10))
+
+	if err != nil {
+		return WorkerInfo{}, err
+	}
+	if response.StatusCode != 200 {
+		return WorkerInfo{}, errors.New("user not found")
+	}
+
+	var worker WorkerInfo
+	err = json.NewDecoder(response.Body).Decode(&worker)
+	if err != nil {
+		return WorkerInfo{}, err
+	} else {
+		return worker, nil
+	}
+}
+
 func GetVehicleDetails(id uint) (VehicleInfo, error) {
 	response, err := http.Get(vehicleServiceBasePath.Next().Host + "/api/vehicles/" + strconv.FormatUint(uint64(id), 10))
 

@@ -159,6 +159,18 @@ func FindUser(id uint) (response.UserInfo, error) {
 	return ui, nil
 }
 
+func FindWorker(id uint) (response.WorkerInfo, error) {
+	worker, err := repository.FindWorkerById(id)
+
+	if err != nil {
+		return response.WorkerInfo{}, err
+	}
+
+	wi := converter.WorkerToWorkerInfo(&worker)
+
+	return wi, nil
+}
+
 func BlockUser(accId uint) error {
 	err := repository.BlockUser(accId)
 
