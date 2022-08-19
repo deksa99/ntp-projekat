@@ -8,15 +8,6 @@ import (
 
 type RequestStatus string
 
-func (m *RequestStatus) Scan(value interface{}) error {
-	*m = RequestStatus(value.([]byte))
-	return nil
-}
-
-func (m RequestStatus) Value() (driver.Value, error) {
-	return string(m), nil
-}
-
 type AppointmentStatus string
 
 func (m *AppointmentStatus) Scan(value interface{}) error {
@@ -29,15 +20,16 @@ func (m AppointmentStatus) Value() (driver.Value, error) {
 }
 
 const (
-	Submitted RequestStatus = "Submitted"
-	Accepted  RequestStatus = "Accepted"
-	Rejected  RequestStatus = "Rejected"
+	Submitted        RequestStatus = "Submitted"
+	CancelledRequest RequestStatus = "Cancelled"
+	Accepted         RequestStatus = "Accepted"
+	Rejected         RequestStatus = "Rejected"
 )
 
 const (
-	Scheduled AppointmentStatus = "Scheduled"
-	Cancelled AppointmentStatus = "Cancelled"
-	Finished  AppointmentStatus = "Finished"
+	Scheduled            AppointmentStatus = "Scheduled"
+	CancelledAppointment AppointmentStatus = "Cancelled"
+	Finished             AppointmentStatus = "Finished"
 )
 
 type AppointmentRequest struct {

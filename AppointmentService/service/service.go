@@ -57,11 +57,34 @@ func CreateAppointmentRequest(userId uint, vehicleId uint, serviceId uint, carSe
 		SubmittedAt:    time.Now(),
 	}
 
-	newRequest, err := repository.SaveRequest(&request)
+	newRequest, err := repository.SaveRequest(request)
 
 	if err != nil {
 		return response.AppointmentRequestInfo{}, err
 	}
 
 	return converter.AppointmentRequestToAppointmentRequestInfo(&newRequest), nil
+}
+
+func CancelAppointmentRequest(userId uint, appointmentRequestId uint) (response.AppointmentRequestInfo, error) {
+	request, err := repository.FindRequestById(appointmentRequestId)
+	if err != nil {
+		return response.AppointmentRequestInfo{}, err
+	}
+
+	if userId != request.UserID {
+		return response.AppointmentRequestInfo{}, errors.New("oops you can only cancel your request")
+	}
+
+	if request.Status != model.Submitted {
+		return response.AppointmentRequestInfo{}, errors.New("appointment has already been " + string(request.Status))
+	}
+
+	request.Status = model.CancelledRequest
+
+	cancelledRequest, err := repository.SaveRequest(request)
+	if err != nil {
+		return response.AppointmentRequestInfo{}, err
+	}
+	return converter.AppointmentRequestToAppointmentRequestInfo(&cancelledRequest), nil
 }
