@@ -27,3 +27,26 @@ func AppointmentRequestToAppointmentRequestInfo(ar *model.AppointmentRequest) re
 		SubmittedAt:    ar.SubmittedAt,
 	}
 }
+
+func AppointmentToAppointmentInfo(a *model.Appointment) response.AppointmentInfo {
+	return response.AppointmentInfo{
+		UserId:         a.AppointmentRequest.UserID,
+		FirstName:      a.AppointmentRequest.FirstName,
+		LastName:       a.AppointmentRequest.LastName,
+		Email:          a.AppointmentRequest.Email,
+		VehicleId:      a.AppointmentRequest.VehicleID,
+		Manufacturer:   a.AppointmentRequest.Manufacturer,
+		CarModel:       a.AppointmentRequest.CarModel,
+		LicencePlate:   a.AppointmentRequest.LicencePlate,
+		ChassisNumber:  a.AppointmentRequest.ChassisNumber,
+		ServiceId:      a.AppointmentRequest.ServiceID,
+		ServiceName:    a.AppointmentRequest.ServiceName,
+		ServicePrice:   a.AppointmentRequest.ServicePrice,
+		CarServiceId:   a.AppointmentRequest.CarServiceID,
+		CarServiceName: a.AppointmentRequest.CarServiceName,
+		Street:         a.AppointmentRequest.Street,
+		StartTime:      a.StartTime,
+		FinishTime:     a.FinishTime,
+		Status:         a.Status,
+	}
+}

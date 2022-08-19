@@ -34,3 +34,24 @@ type AppointmentRequestInfo struct {
 	Status         model.RequestStatus `json:"Status"`
 	SubmittedAt    time.Time           `json:"SubmittedAt"`
 }
+
+type AppointmentInfo struct {
+	UserId         uint                    `json:"UserId"`
+	FirstName      string                  `json:"FirstName"`
+	LastName       string                  `json:"LastName"`
+	Email          string                  `json:"Email"`
+	VehicleId      uint                    `json:"VehicleId"`
+	Manufacturer   string                  `json:"Manufacturer"`
+	CarModel       string                  `json:"CarModel"`
+	LicencePlate   string                  `json:"LicencePlate"`
+	ChassisNumber  string                  `json:"ChassisNumber"`
+	ServiceId      uint                    `json:"ServiceId"`
+	ServiceName    string                  `json:"ServiceName"`
+	ServicePrice   float32                 `json:"ServicePrice"`
+	CarServiceId   uint                    `json:"CarServiceId"`
+	CarServiceName string                  `json:"CarServiceName"`
+	Street         string                  `json:"Street"`
+	StartTime      time.Time               `json:"StartTime"`
+	FinishTime     time.Time               `json:"FinishTime"`
+	Status         model.AppointmentStatus `json:"Status"`
+}

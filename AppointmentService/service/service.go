@@ -77,7 +77,11 @@ func CancelAppointmentRequest(userId uint, appointmentRequestId uint) (response.
 	}
 
 	if request.Status != model.Submitted {
-		return response.AppointmentRequestInfo{}, errors.New("appointment has already been " + string(request.Status))
+		return response.AppointmentRequestInfo{}, errors.New("request has already been " + string(request.Status))
+	}
+
+	if !request.Available {
+		return response.AppointmentRequestInfo{}, errors.New("service '" + request.ServiceName + "' not available")
 	}
 
 	request.Status = model.CancelledRequest
@@ -100,6 +104,22 @@ func GetRequestsForUser(id uint) ([]response.AppointmentRequestInfo, error) {
 
 	if requestInfos == nil {
 		return []response.AppointmentRequestInfo{}, nil
+	}
+
+	return requestInfos, nil
+}
+
+func GetAppointmentsForUser(id uint) ([]response.AppointmentInfo, error) {
+	appointments := repository.GetAppointmentsForUser(id)
+
+	var requestInfos []response.AppointmentInfo
+
+	for _, a := range appointments {
+		requestInfos = append(requestInfos, converter.AppointmentToAppointmentInfo(&a))
+	}
+
+	if requestInfos == nil {
+		return []response.AppointmentInfo{}, nil
 	}
 
 	return requestInfos, nil

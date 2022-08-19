@@ -1,7 +1,6 @@
 package model
 
 import (
-	"database/sql/driver"
 	"gorm.io/gorm"
 	"time"
 )
@@ -9,15 +8,6 @@ import (
 type RequestStatus string
 
 type AppointmentStatus string
-
-func (m *AppointmentStatus) Scan(value interface{}) error {
-	*m = AppointmentStatus(value.([]byte))
-	return nil
-}
-
-func (m AppointmentStatus) Value() (driver.Value, error) {
-	return string(m), nil
-}
 
 const (
 	Submitted        RequestStatus = "Submitted"
