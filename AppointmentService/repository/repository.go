@@ -63,6 +63,12 @@ func GetAppointmentsForUser(id uint) []model.Appointment {
 	return appointments
 }
 
+func GetAppointmentsForWorker(id uint) []model.Appointment {
+	var appointments []model.Appointment
+	database.Db.Joins("AppointmentRequest").Where("worker_id = ?", id).Find(&appointments)
+	return appointments
+}
+
 func GetRequestsForCarService(id uint) []model.AppointmentRequest {
 	var appRequests []model.AppointmentRequest
 	database.Db.Where("car_service_id = ?", id).Find(&appRequests)

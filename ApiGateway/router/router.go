@@ -32,5 +32,17 @@ func HandleRequests() {
 	router.HandleFunc("/car-services/service/{id}/change-availability", handler.ChangeAvailability).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/car-services/{id}/catalog", handler.GetCatalog).Methods("GET", "OPTIONS")
 
+	//Appointment service
+	router.HandleFunc("/appointments/requests", handler.CreateAppointmentRequest).Methods("POST", "OPTIONS")
+	router.HandleFunc("/appointments/requests/cancel", handler.CancelRequest).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/appointments/requests", handler.GetRequestsForUser).Methods("GET", "OPTIONS")
+	router.HandleFunc("/appointments", handler.GetAppointmentsForUser).Methods("GET", "OPTIONS")
+	router.HandleFunc("/appointments/requests/{requestId}/accept", handler.AcceptRequest).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/appointments/requests/{requestId}/reject", handler.RejectRequest).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/appointments/{appointmentId}/finish", handler.FinishAppointment).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/appointments/{appointmentId}/cancel", handler.CancelAppointment).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/appointments/requests/service/{carServiceId}", handler.GetRequestsForCarService).Methods("GET", "OPTIONS")
+	router.HandleFunc("/appointments/worker", handler.GetAppointmentsForWorker).Methods("GET", "OPTIONS")
+
 	log.Fatal(http.ListenAndServe(":8090", router))
 }

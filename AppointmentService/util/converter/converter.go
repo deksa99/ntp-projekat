@@ -7,6 +7,7 @@ import (
 
 func AppointmentRequestToAppointmentRequestInfo(ar *model.AppointmentRequest) response.AppointmentRequestInfo {
 	return response.AppointmentRequestInfo{
+		Id:             ar.ID,
 		UserId:         ar.UserID,
 		FirstName:      ar.FirstName,
 		LastName:       ar.LastName,
@@ -30,6 +31,7 @@ func AppointmentRequestToAppointmentRequestInfo(ar *model.AppointmentRequest) re
 
 func AppointmentToAppointmentInfo(a *model.Appointment) response.AppointmentInfo {
 	return response.AppointmentInfo{
+		Id:             a.ID,
 		UserId:         a.AppointmentRequest.UserID,
 		FirstName:      a.AppointmentRequest.FirstName,
 		LastName:       a.AppointmentRequest.LastName,

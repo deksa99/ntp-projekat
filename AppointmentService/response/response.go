@@ -15,6 +15,7 @@ func (e *Error) Error() string {
 }
 
 type AppointmentRequestInfo struct {
+	Id             uint                `json:"Id"`
 	UserId         uint                `json:"UserId"`
 	FirstName      string              `json:"FirstName"`
 	LastName       string              `json:"LastName"`
@@ -36,6 +37,7 @@ type AppointmentRequestInfo struct {
 }
 
 type AppointmentInfo struct {
+	Id             uint                    `json:"Id"`
 	UserId         uint                    `json:"UserId"`
 	FirstName      string                  `json:"FirstName"`
 	LastName       string                  `json:"LastName"`

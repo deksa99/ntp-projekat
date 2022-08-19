@@ -222,7 +222,7 @@ func FinishCancelAppointment(appointmentId uint, workerID uint, status model.App
 	}
 }
 
-func GetNewRequestsForCarService(carServiceId uint) ([]response.AppointmentRequestInfo, error) {
+func GetRequestsForCarService(carServiceId uint) ([]response.AppointmentRequestInfo, error) {
 	requests := repository.GetRequestsForCarService(carServiceId)
 
 	var requestInfos []response.AppointmentRequestInfo
@@ -233,6 +233,22 @@ func GetNewRequestsForCarService(carServiceId uint) ([]response.AppointmentReque
 
 	if requestInfos == nil {
 		return []response.AppointmentRequestInfo{}, nil
+	}
+
+	return requestInfos, nil
+}
+
+func GetAppointmentsForWorker(workerId uint) ([]response.AppointmentInfo, error) {
+	appointments := repository.GetAppointmentsForWorker(workerId)
+
+	var requestInfos []response.AppointmentInfo
+
+	for _, a := range appointments {
+		requestInfos = append(requestInfos, converter.AppointmentToAppointmentInfo(&a))
+	}
+
+	if requestInfos == nil {
+		return []response.AppointmentInfo{}, nil
 	}
 
 	return requestInfos, nil
