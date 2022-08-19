@@ -18,7 +18,7 @@ func HandleRequests() {
 	router.HandleFunc("/requests/{requestId}/{workerId}/reject", handler.RejectRequest).Methods("PATCH")
 	router.HandleFunc("/{appointmentId}/{workerId}/finish", handler.FinishAppointment).Methods("PATCH")
 	router.HandleFunc("/{appointmentId}/{workerId}/cancel", handler.CancelAppointment).Methods("PATCH")
-	router.HandleFunc("/requests/service/{serviceId}", handler.ShowNewRequestsForService).Methods("GET")
+	router.HandleFunc("/requests/service/{carServiceId}", handler.GetRequestsForCarService).Methods("GET")
 	router.HandleFunc("/worker/{workerId}", handler.ShowAppointmentsForWorker).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8084", router))

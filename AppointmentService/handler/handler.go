@@ -257,8 +257,28 @@ func CancelAppointment(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func ShowNewRequestsForService(w http.ResponseWriter, r *http.Request) {
+func GetRequestsForCarService(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	carServiceId, _ := strconv.ParseUint(params["carServiceId"], 10, 32)
 
+	w.Header().Set("Content-Type", "application/json")
+
+	requests, err := service.GetNewRequestsForCarService(uint(carServiceId))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(requests)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
 }
 
 func ShowAppointmentsForWorker(w http.ResponseWriter, r *http.Request) {

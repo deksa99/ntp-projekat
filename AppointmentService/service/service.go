@@ -221,3 +221,19 @@ func FinishCancelAppointment(appointmentId uint, workerID uint, status model.App
 		return converter.AppointmentToAppointmentInfo(&updatedAppointment), nil
 	}
 }
+
+func GetNewRequestsForCarService(carServiceId uint) ([]response.AppointmentRequestInfo, error) {
+	requests := repository.GetRequestsForCarService(carServiceId)
+
+	var requestInfos []response.AppointmentRequestInfo
+
+	for _, r := range requests {
+		requestInfos = append(requestInfos, converter.AppointmentRequestToAppointmentRequestInfo(&r))
+	}
+
+	if requestInfos == nil {
+		return []response.AppointmentRequestInfo{}, nil
+	}
+
+	return requestInfos, nil
+}
