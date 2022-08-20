@@ -10,5 +10,6 @@
     <orderEntry type="module" module-name="CarServiceService" />
     <orderEntry type="module" module-name="AppointmentService" />
     <orderEntry type="module" module-name="ReviewService" />
+    <orderEntry type="module" module-name="EmailService" />
   </component>
 </module>
