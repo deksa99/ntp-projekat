@@ -7,6 +7,7 @@ import (
 
 func ReviewToReviewInfo(r *model.Review) response.ReviewInfo {
 	return response.ReviewInfo{
+		ID:             r.ID,
 		AppointmentID:  r.AppointmentID,
 		ServiceID:      r.ServiceID,
 		ServiceName:    r.ServiceName,
@@ -22,8 +23,13 @@ func ReviewToReviewInfo(r *model.Review) response.ReviewInfo {
 
 func ReportToReportInfo(r *model.ReviewReport) response.ReportInfo {
 	return response.ReportInfo{
+		ID:             r.ID,
+		AppointmentID:  r.Review.AppointmentID,
+		ServiceID:      r.Review.ServiceID,
 		ServiceName:    r.Review.ServiceName,
 		CarServiceName: r.Review.CarServiceName,
+		CarServiceID:   r.Review.CarServiceID,
+		UserID:         r.Review.UserID,
 		FirstName:      r.Review.FirstName,
 		LastName:       r.Review.LastName,
 		Rating:         r.Review.Rating,

@@ -13,7 +13,7 @@ func HandleRequests() {
 	router.HandleFunc("/reported", handler.GetReportedReviews).Methods("GET")
 	router.HandleFunc("", handler.CreateReview).Methods("POST")
 	router.HandleFunc("/{reviewId}/report", handler.ReportReview).Methods("PATCH")
-	router.HandleFunc("/{reviewId}/process", handler.ReportReview).Methods("PATCH")
+	router.HandleFunc("/report/{reportId}/process", handler.ProcessReport).Methods("PATCH")
 
 	log.Fatal(http.ListenAndServe(":8085", router))
 }

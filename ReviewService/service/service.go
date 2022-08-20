@@ -1,7 +1,10 @@
 package service
 
 import (
+	"ReviewService/model"
+	"ReviewService/repository"
 	"ReviewService/response"
+	"ReviewService/util/converter"
 	"github.com/pkg/errors"
 )
 
@@ -9,14 +12,57 @@ func AddReview(AppointmentID uint, ServiceID uint, CarServiceID uint, UserID uin
 	return response.ReviewInfo{}, errors.New("not implemented")
 }
 
-func GetReportedReviews() ([]response.ReviewInfo, error) {
-	return []response.ReviewInfo{}, errors.New("not implemented")
+func GetReportedReviews() ([]response.ReportInfo, error) {
+	reports := repository.GetReports()
+
+	var infos []response.ReportInfo
+
+	for _, r := range reports {
+		infos = append(infos, converter.ReportToReportInfo(&r))
+	}
+
+	if len(infos) == 0 {
+		return []response.ReportInfo{}, nil
+	}
+
+	return infos, nil
 }
 
 func ReportReview(id uint) (response.ReviewInfo, error) {
-	return response.ReviewInfo{}, errors.New("not implemented")
+	review, err := repository.GetReviewById(id)
+	if err != nil {
+		return response.ReviewInfo{}, err
+	}
+	report := model.ReviewReport{
+		Review:        review,
+		Processed:     false,
+		Inappropriate: false,
+	}
+
+	_, err = repository.SaveReport(report)
+	if err != nil {
+		return response.ReviewInfo{}, err
+	}
+
+	return converter.ReviewToReviewInfo(&review), nil
 }
 
 func ProcessReport(id uint, inappropriate bool) (response.ReportInfo, error) {
-	return response.ReportInfo{}, errors.New("not implemented")
+	report, err := repository.GetReportById(id)
+	if err != nil {
+		return response.ReportInfo{}, err
+	}
+	if report.Processed {
+		return response.ReportInfo{}, errors.New("already processed")
+	}
+
+	report.Inappropriate = inappropriate
+	report.Processed = true
+
+	_, err = repository.SaveReport(report)
+	if err != nil {
+		return response.ReportInfo{}, err
+	}
+
+	return converter.ReportToReportInfo(&report), nil
 }

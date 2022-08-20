@@ -10,6 +10,7 @@ func (e *Error) Error() string {
 }
 
 type ReviewInfo struct {
+	ID             uint   `json:"ID"`
 	AppointmentID  uint   `json:"AppointmentID"`
 	ServiceID      uint   `json:"ServiceID"`
 	ServiceName    string `json:"ServiceName"`
@@ -23,8 +24,13 @@ type ReviewInfo struct {
 }
 
 type ReportInfo struct {
+	ID             uint   `json:"ID"`
+	AppointmentID  uint   `json:"AppointmentID"`
+	ServiceID      uint   `json:"ServiceID"`
 	ServiceName    string `json:"ServiceName"`
 	CarServiceName string `json:"CarServiceName"`
+	CarServiceID   uint   `json:"CarServiceID"`
+	UserID         uint   `json:"UserID"`
 	FirstName      string `json:"FirstName"`
 	LastName       string `json:"LastName"`
 	Rating         uint   `json:"Rating"`

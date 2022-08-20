@@ -16,6 +16,8 @@ import (
 func GetReportedReviews(w http.ResponseWriter, _ *http.Request) {
 	reported, err := service.GetReportedReviews()
 
+	w.Header().Set("Content-Type", "application/json")
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -66,6 +68,8 @@ func ReportReview(w http.ResponseWriter, r *http.Request) {
 
 	reported, err := service.ReportReview(uint(id))
 
+	w.Header().Set("Content-Type", "application/json")
+
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -78,9 +82,9 @@ func ReportReview(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func ProcessReview(w http.ResponseWriter, r *http.Request) {
+func ProcessReport(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	id, _ := strconv.ParseUint(params["reviewId"], 10, 32)
+	id, _ := strconv.ParseUint(params["reportId"], 10, 32)
 
 	var pr request.ProcessReport
 
