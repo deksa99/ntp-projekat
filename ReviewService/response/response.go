@@ -8,3 +8,27 @@ type Error struct {
 func (e *Error) Error() string {
 	return e.Message
 }
+
+type ReviewInfo struct {
+	AppointmentID  uint   `json:"AppointmentID"`
+	ServiceID      uint   `json:"ServiceID"`
+	ServiceName    string `json:"ServiceName"`
+	CarServiceName string `json:"CarServiceName"`
+	CarServiceID   uint   `json:"CarServiceID"`
+	UserID         uint   `json:"UserID"`
+	FirstName      string `json:"FirstName"`
+	LastName       string `json:"LastName"`
+	Rating         uint   `json:"Rating"`
+	Comment        string `json:"Comment"`
+}
+
+type ReportInfo struct {
+	ServiceName    string `json:"ServiceName"`
+	CarServiceName string `json:"CarServiceName"`
+	FirstName      string `json:"FirstName"`
+	LastName       string `json:"LastName"`
+	Rating         uint   `json:"Rating"`
+	Comment        string `json:"Comment"`
+	Processed      bool   `json:"Processed"`
+	Inappropriate  bool   `json:"Inappropriate"`
+}
