@@ -44,5 +44,11 @@ func HandleRequests() {
 	router.HandleFunc("/appointments/requests/service/{carServiceId}", handler.GetRequestsForCarService).Methods("GET", "OPTIONS")
 	router.HandleFunc("/appointments/worker", handler.GetAppointmentsForWorker).Methods("GET", "OPTIONS")
 
+	//Review service
+	router.HandleFunc("/reviews/reported", handler.GetReports).Methods("GET", "OPTIONS")
+	router.HandleFunc("/reviews/{id}/report", handler.ReportReview).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/reviews/report/{id}/process", handler.ProcessReport).Methods("PATCH", "OPTIONS")
+	router.HandleFunc("/reviews/add", handler.AddReview).Methods("POST", "OPTIONS")
+
 	log.Fatal(http.ListenAndServe(":8090", router))
 }
