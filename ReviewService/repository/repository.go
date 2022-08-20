@@ -40,6 +40,16 @@ func SaveReport(report model.ReviewReport) (model.ReviewReport, error) {
 	return report, nil
 }
 
+func SaveReview(review model.Review) (model.Review, error) {
+	r := database.Db.Save(&review)
+
+	if r.Error != nil {
+		return review, r.Error
+	}
+
+	return review, nil
+}
+
 func GetReports() []model.ReviewReport {
 	var reports []model.ReviewReport
 

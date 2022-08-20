@@ -41,7 +41,7 @@ func FindRequestById(requestId uint) (model.AppointmentRequest, error) {
 
 func FindAppointmentById(appointmentId uint) (model.Appointment, error) {
 	var app model.Appointment
-	database.Db.First(&app, appointmentId)
+	database.Db.Preload("AppointmentRequest").First(&app, appointmentId)
 
 	if app.ID == 0 {
 		return app, errors.New("appointment not found")

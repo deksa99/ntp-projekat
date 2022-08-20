@@ -31,6 +31,9 @@ func GetReportedReviews(w http.ResponseWriter, _ *http.Request) {
 }
 
 func CreateReview(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userId, _ := strconv.ParseUint(params["userId"], 10, 32)
+
 	var cr request.AddReview
 
 	err := helper.DecodeJSONBody(w, r, &cr)
@@ -48,7 +51,7 @@ func CreateReview(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	newReview, err := service.AddReview(cr.AppointmentID, cr.ServiceID, cr.CarServiceID, cr.UserID, cr.Rating, cr.Comment)
+	newReview, err := service.AddReview(cr.AppointmentID, uint(userId), cr.Rating, cr.Comment)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)

@@ -253,3 +253,13 @@ func GetAppointmentsForWorker(workerId uint) ([]response.AppointmentInfo, error)
 
 	return requestInfos, nil
 }
+
+func GetAppointmentById(id uint) (response.AppointmentInfo, error) {
+	appointment, err := repository.FindAppointmentById(id)
+
+	if err != nil {
+		return response.AppointmentInfo{}, err
+	}
+
+	return converter.AppointmentToAppointmentInfo(&appointment), nil
+}

@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	github.com/hlts2/round-robin v0.0.0-20211119053418-5ea74e1f7bfc // indirect
 	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/pgconn v1.13.0 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect

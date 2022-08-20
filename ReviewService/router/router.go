@@ -11,7 +11,7 @@ func HandleRequests() {
 	router := mux.NewRouter().PathPrefix("/api/reviews").Subrouter()
 
 	router.HandleFunc("/reported", handler.GetReportedReviews).Methods("GET")
-	router.HandleFunc("", handler.CreateReview).Methods("POST")
+	router.HandleFunc("/add/{userId}", handler.CreateReview).Methods("POST")
 	router.HandleFunc("/{reviewId}/report", handler.ReportReview).Methods("PATCH")
 	router.HandleFunc("/report/{reportId}/process", handler.ProcessReport).Methods("PATCH")
 

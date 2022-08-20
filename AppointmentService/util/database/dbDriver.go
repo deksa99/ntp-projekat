@@ -96,6 +96,12 @@ var (
 			ServiceID: 19, ServiceName: "Veliki servis", ServicePrice: 35050, Available: true,
 			CarServiceID: 4, CarServiceName: "Auto Servis Roki 2", Street: "Moše Pijade 17, Sremska Kamenica",
 			Status: model.Rejected, SubmittedAt: time.Date(2022, 8, 15, 9, 40, 31, 0, time.Local)},
+
+		{UserID: 3, FirstName: "Laza", LastName: "Lazic", Email: "user3@maildrop.cc",
+			VehicleID: 4, Manufacturer: "Porsche", CarModel: "911 Turbo S", LicencePlate: "NS123456", ChassisNumber: "CCC123456CCC",
+			ServiceID: 19, ServiceName: "Veliki servis", ServicePrice: 35050, Available: true,
+			CarServiceID: 4, CarServiceName: "Auto Servis Roki 2", Street: "Moše Pijade 17, Sremska Kamenica",
+			Status: model.Accepted, SubmittedAt: time.Date(2022, 8, 17, 9, 40, 31, 0, time.Local)},
 	}
 	appointments = []model.Appointment{
 		{AppointmentRequestID: 3, WorkerID: 3, FirstName: "Pera", LastName: "Perić", StartTime: time.Date(2022, 7, 15, 10, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 7, 16, 14, 34, 44, 0, time.Local), Status: model.Finished},
@@ -106,6 +112,7 @@ var (
 		{AppointmentRequestID: 9, WorkerID: 6, FirstName: "Ivan", LastName: "Ivanovic", StartTime: time.Date(2022, 8, 16, 14, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.CancelledAppointment},
 
 		{AppointmentRequestID: 11, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 8, 26, 9, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
+		{AppointmentRequestID: 14, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 8, 19, 9, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 8, 21, 9, 0, 0, 0, time.Local), Status: model.Finished},
 	}
 )
 

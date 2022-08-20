@@ -4,12 +4,43 @@ import (
 	"ReviewService/model"
 	"ReviewService/repository"
 	"ReviewService/response"
+	"ReviewService/util/api"
 	"ReviewService/util/converter"
 	"github.com/pkg/errors"
 )
 
-func AddReview(AppointmentID uint, ServiceID uint, CarServiceID uint, UserID uint, Rating uint, Comment string) (response.ReviewInfo, error) {
-	return response.ReviewInfo{}, errors.New("not implemented")
+func AddReview(appointmentID uint, userId uint, rating uint, comment string) (response.ReviewInfo, error) {
+	appointment, err := api.GetAppointmentDetails(appointmentID)
+	if err != nil {
+		return response.ReviewInfo{}, err
+	}
+	if appointment.UserId != userId {
+		return response.ReviewInfo{}, errors.New("not your appointment")
+	}
+	if appointment.Status != "Finished" {
+		return response.ReviewInfo{}, errors.New("appointment not finished")
+	}
+	if rating > 5 || rating < 1 {
+		return response.ReviewInfo{}, errors.New("rating range error")
+	}
+	review := model.Review{
+		AppointmentID:  appointment.Id,
+		ServiceID:      appointment.ServiceId,
+		ServiceName:    appointment.ServiceName,
+		CarServiceID:   appointment.CarServiceId,
+		CarServiceName: appointment.CarServiceName,
+		UserID:         appointment.UserId,
+		FirstName:      appointment.FirstName,
+		LastName:       appointment.LastName,
+		Rating:         rating,
+		Comment:        comment,
+	}
+	newReview, err := repository.SaveReview(review)
+	if err != nil {
+		return response.ReviewInfo{}, err
+	}
+
+	return converter.ReviewToReviewInfo(&newReview), nil
 }
 
 func GetReportedReviews() ([]response.ReportInfo, error) {

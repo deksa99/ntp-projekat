@@ -304,3 +304,27 @@ func GetAppointmentsForWorker(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func GetAppointmentForId(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := strconv.ParseUint(params["id"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	app, err := service.GetAppointmentById(uint(id))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(app)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+}
