@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <title>Servis otkazan</title>
+
+    <style>
+        table, th, td {
+            border: 1px dotted black;
+            border-radius: 5px;
+            padding: 10px 15px 10px 10px;
+        }
+        th, td {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div>
+    Poštovani, <br><br>
+    Auto servis je otkazao vaš termin. Za više detalja kontaktirajte auto servis.<br><br>
+</div>
+    <table style="">
+        <tbody>
+        <tr>
+            <th>Korisnik</th>
+            <td>{{.FirstName}} {{.LastName}}</td>
+        </tr>
+        <tr>
+            <th>Vozilo</th>
+            <td>{{.Manufacturer}} {{.CarModel}}</td>
+        </tr>
+        <tr>
+            <th>Registarski broj vozila</th>
+            <td>{{.LicencePlate}}</td>
+        </tr>
+        <tr>
+            <th>Usluga</th>
+            <td>{{.ServiceName}}</td>
+        </tr>
+        <tr>
+            <th>Cena</th>
+            <td>{{.ServicePrice}}</td>
+        </tr>
+        <tr>
+            <th>Auto servis</th>
+            <td>{{.CarServiceName}} - {{.Street}}</td>
+        </tr>
+        <tr>
+            <th>Zakazano vreme</th>
+            <td>{{.StartTime}}</td>
+        </tr>
+        </tbody>
+    </table>
+<div>
+    <br>
+    Pozdrav!
+</div>
+</body>
+</html>

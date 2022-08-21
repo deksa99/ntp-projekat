@@ -40,21 +40,21 @@ func GetService(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 
-	service, err := service.GetService(uint(id))
+	serv, err := service.GetService(uint(id))
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	err = json.NewEncoder(w).Encode(service)
+	err = json.NewEncoder(w).Encode(serv)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 }
 
-func GetAllCarServices(w http.ResponseWriter, r *http.Request) {
+func GetAllCarServices(w http.ResponseWriter, _ *http.Request) {
 	services := service.FindAllCarServices()
 
 	w.Header().Set("Content-Type", "application/json")

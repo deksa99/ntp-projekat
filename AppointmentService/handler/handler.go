@@ -5,6 +5,7 @@ import (
 	"AppointmentService/request"
 	"AppointmentService/response"
 	"AppointmentService/service"
+	"AppointmentService/util/api"
 	"AppointmentService/util/helper"
 	"encoding/json"
 	"errors"
@@ -175,6 +176,9 @@ func AcceptRequest(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		// Email notification
+		errCh := make(chan error)
+		go api.RequestAccepted(&appointment, errCh)
 	}
 }
 
@@ -200,6 +204,9 @@ func RejectRequest(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		// Email notification
+		errCh := make(chan error)
+		go api.RequestRejected(&req, errCh)
 	}
 }
 
@@ -212,8 +219,6 @@ func FinishAppointment(w http.ResponseWriter, r *http.Request) {
 
 	appointment, err := service.FinishCancelAppointment(uint(aId), uint(wId), model.Finished)
 
-	// TODO mail notification
-
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
@@ -227,6 +232,9 @@ func FinishAppointment(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		// Email notification
+		errCh := make(chan error)
+		go api.AppointmentFinished(&appointment, errCh)
 	}
 }
 
@@ -239,8 +247,6 @@ func CancelAppointment(w http.ResponseWriter, r *http.Request) {
 
 	appointment, err := service.FinishCancelAppointment(uint(aId), uint(wId), model.CancelledAppointment)
 
-	// TODO mail notification
-
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
@@ -254,6 +260,9 @@ func CancelAppointment(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
+		// Email notification
+		errCh := make(chan error)
+		go api.AppointmentCancelled(&appointment, errCh)
 	}
 }
 

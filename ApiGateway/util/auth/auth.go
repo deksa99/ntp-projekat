@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func Authentication(w http.ResponseWriter, r *http.Request, roles []string) (model.AuthenticatedUser, error) {
+func Authentication(_ http.ResponseWriter, r *http.Request, roles []string) (model.AuthenticatedUser, error) {
 
 	var authUser model.AuthenticatedUser
 

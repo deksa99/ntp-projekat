@@ -2,7 +2,7 @@ package main
 
 import (
 	"UserService/router"
-	database "UserService/util/database"
+	"UserService/util/database"
 	"log"
 
 	"github.com/joho/godotenv"
