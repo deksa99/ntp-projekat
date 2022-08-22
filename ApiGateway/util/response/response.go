@@ -27,6 +27,10 @@ var ReviewServiceRoundRobin, _ = rr.New(
 	&url.URL{Host: "http://localhost:8085"},
 )
 
+var ReportServiceRoundRobin, _ = rr.New(
+	&url.URL{Host: "http://localhost:8087"},
+)
+
 func DelegateResponse(response *http.Response, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", response.Header.Get("Content-Type"))
 	w.Header().Set("Content-Length", response.Header.Get("Content-Length"))
