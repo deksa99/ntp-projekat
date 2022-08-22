@@ -24,13 +24,13 @@ async fn manufacturer(car_service_id: u32) -> Json<Vec<model::ManufacturerReport
 }
 
 #[get("/service/<car_service_id>")]
-fn service(car_service_id: u32) -> Json<String> {
-    Json(format!("{{ \"hi\": \"manufacturer - {}\" }}", car_service_id).to_string())
+async fn service(car_service_id: u32) -> Json<Vec<model::ServiceReport>> {
+    Json(handle::service_report(car_service_id).await)
 }
 
 #[get("/financial/<car_service_id>")]
-fn financial(car_service_id: u32) -> Json<String> {
-    Json(format!("{{ \"hi\": \"manufacturer - {}\" }}", car_service_id).to_string())
+async fn financial(car_service_id: u32) -> Json<model::FinancialReport> {
+    Json(handle::financial_report(car_service_id).await)
 }
 
 #[launch]

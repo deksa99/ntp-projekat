@@ -30,3 +30,16 @@ pub struct ManufacturerReport {
 	#[serde(rename = "Number")] pub number: u32,
 	#[serde(rename = "TotalPrice")] pub total_price: f32
 }
+
+#[derive(Serialize)]
+pub struct ServiceReport {
+	#[serde(rename = "Service")] pub service: String,
+	#[serde(rename = "Number")] pub number: u32,
+	#[serde(rename = "TotalPrice")] pub total_price: f32
+}
+
+#[derive(Serialize)]
+pub struct FinancialReport {
+	#[serde(rename = "Number")] pub number: u32,
+	#[serde(rename = "TotalPrice")] pub total_price: f32
+}
