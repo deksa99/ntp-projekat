@@ -48,7 +48,6 @@ const Login = () => {
             required
             defaultValue={"user"}
             id="role"
-            label="Korisnik"
             name="role"
           >
             <MenuItem value={"user"}>Korisnik</MenuItem>

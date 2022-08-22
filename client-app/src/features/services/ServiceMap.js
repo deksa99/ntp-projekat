@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, CssBaseline, Box, Typography } from "@mui/material";
 
-const HomePage = () => {
+const ServiceMap = () => {
   return (
     <Container type="main" maxWidth="md">
       <CssBaseline />
@@ -14,11 +14,11 @@ const HomePage = () => {
         }}
       >
         <Typography component="h1" variant="h2">
-          kreativna početna strana
+          mapa servisa
         </Typography>
       </Box>
     </Container>
   );
 };
 
-export default HomePage;
+export default ServiceMap;
