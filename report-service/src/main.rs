@@ -1,6 +1,9 @@
 #[macro_use] 
 extern crate rocket;
 
+mod handle;
+mod model;
+
 use rocket::{routes, Rocket, Build, Request};
 use rocket::http::Status;
 use rocket::serde::json::Json;
@@ -16,18 +19,18 @@ fn default(status: Status, req: &Request) -> String {
 }
 
 #[get("/manufacturer/<car_service_id>")]
-fn manufacturer(car_service_id: i32) -> Json<String> {
-    Json(format!("{{ \"hi\": \"manufacturer - {}\" }}", car_service_id).to_string())
+async fn manufacturer(car_service_id: u32) -> Json<Vec<model::AppointmentInfo>> {
+    Json(handle::man_report(car_service_id).await)
 }
 
 #[get("/service/<car_service_id>")]
-fn service(car_service_id: i32) -> Json<String> {
-    Json(format!("{{ \"hi\": \"service - {}\" }}", car_service_id).to_string())
+fn service(car_service_id: u32) -> Json<String> {
+    Json(format!("{{ \"hi\": \"manufacturer - {}\" }}", car_service_id).to_string())
 }
 
 #[get("/financial/<car_service_id>")]
-fn financial(car_service_id: i32) -> Json<String> {
-    Json(format!("{{ \"hi\": \"financial - {}\" }}", car_service_id).to_string())
+fn financial(car_service_id: u32) -> Json<String> {
+    Json(format!("{{ \"hi\": \"manufacturer - {}\" }}", car_service_id).to_string())
 }
 
 #[launch]
