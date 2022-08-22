@@ -28,7 +28,7 @@ function App() {
       <Routes>
         <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/sign-up" element={<RegistrationPage />} />
         <Route path="/services" element={<ServiceInfoPage />} />
         <Route path="/appointments" element={<ProtectedRoute isAllowed={!!role && role.includes('user')}/>}> 
           <Route path="/appointments" element={<AppointmentsPage />} />
