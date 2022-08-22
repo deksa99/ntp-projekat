@@ -120,6 +120,19 @@ func GetRequestsForCarService(w http.ResponseWriter, r *http.Request) {
 	response.HandleRequest(w, r, url)
 }
 
+func GetAppointmentsForCarService(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	cId := params["carServiceId"]
+
+	_, err := auth.Authentication(w, r, []string{"worker"})
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusForbidden)
+		return
+	}
+	url := response.AppointmentServiceRoundRobin.Next().Host + "/api/appointments/car-service/" + cId
+	response.HandleRequest(w, r, url)
+}
+
 func GetAppointmentsForWorker(w http.ResponseWriter, r *http.Request) {
 	worker, err := auth.Authentication(w, r, []string{"worker"})
 	if err != nil {

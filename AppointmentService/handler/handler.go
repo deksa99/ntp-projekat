@@ -314,6 +314,30 @@ func GetAppointmentsForWorker(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func GetAppointmentsForCarService(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	carServiceId, _ := strconv.ParseUint(params["carServiceId"], 10, 32)
+
+	w.Header().Set("Content-Type", "application/json")
+
+	appointments, err := service.GetAppointmentsForCarService(uint(carServiceId))
+
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		err = json.NewEncoder(w).Encode(response.Error{Message: err.Error(), Status: http.StatusBadRequest})
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	} else {
+		err = json.NewEncoder(w).Encode(appointments)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+}
+
 func GetAppointmentForId(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseUint(params["id"], 10, 32)

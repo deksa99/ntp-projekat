@@ -42,6 +42,7 @@ func HandleRequests() {
 	router.HandleFunc("/appointments/{appointmentId}/finish", handler.FinishAppointment).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/appointments/{appointmentId}/cancel", handler.CancelAppointment).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/appointments/requests/service/{carServiceId}", handler.GetRequestsForCarService).Methods("GET", "OPTIONS")
+	router.HandleFunc("/appointments/car-service/{carServiceId}", handler.GetAppointmentsForCarService).Methods("GET", "OPTIONS")
 	router.HandleFunc("/appointments/worker", handler.GetAppointmentsForWorker).Methods("GET", "OPTIONS")
 
 	//Review service

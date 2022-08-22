@@ -254,6 +254,22 @@ func GetAppointmentsForWorker(workerId uint) ([]response.AppointmentInfo, error)
 	return requestInfos, nil
 }
 
+func GetAppointmentsForCarService(carServiceId uint) ([]response.AppointmentInfo, error) {
+	appointments := repository.GetAppointmentsForCarService(carServiceId)
+
+	var requestInfos []response.AppointmentInfo
+
+	for _, a := range appointments {
+		requestInfos = append(requestInfos, converter.AppointmentToAppointmentInfo(&a))
+	}
+
+	if requestInfos == nil {
+		return []response.AppointmentInfo{}, nil
+	}
+
+	return requestInfos, nil
+}
+
 func GetAppointmentById(id uint) (response.AppointmentInfo, error) {
 	appointment, err := repository.FindAppointmentById(id)
 
