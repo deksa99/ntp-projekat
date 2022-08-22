@@ -43,3 +43,9 @@ pub struct FinancialReport {
 	#[serde(rename = "Number")] pub number: u32,
 	#[serde(rename = "TotalPrice")] pub total_price: f32
 }
+
+#[derive(Serialize)]
+pub struct StatusReport {
+	#[serde(rename = "ServiceStatus")] pub service_status: String,
+	#[serde(rename = "Number")] pub number: u32
+}

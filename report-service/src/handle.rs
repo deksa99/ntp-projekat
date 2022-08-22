@@ -33,10 +33,10 @@ pub async fn service_report(car_service_id: u32) -> Vec<model::ServiceReport> {
     match get_appointments_for_service_request(car_service_id).await {
         Ok(data) => {
             let filtered = data.iter().filter(|a| a.status == "Finished");
-            let mut map: HashMap<(String), model::ServiceReport> = HashMap::new();
+            let mut map: HashMap<String, model::ServiceReport> = HashMap::new();
             for d in filtered {
                 let record = map
-                    .entry((d.service_name.clone()))
+                    .entry(d.service_name.clone())
                     .or_insert(model::ServiceReport {
                         service: d.service_name.clone(),
                         number: 0,
@@ -85,6 +85,28 @@ pub async fn financial_report(car_service_id: u32) -> model::FinancialReport {
     }
 }
 
+pub async fn status_report(car_service_id: u32) -> Vec<model::StatusReport> {
+    match get_appointments_for_service_request(car_service_id).await {
+        Ok(data) => {
+            let mut map: HashMap<String, model::StatusReport> = HashMap::new();
+            for d in data.iter() {
+                let record = map
+                    .entry(d.status.clone())
+                    .or_insert(model::StatusReport {
+                        service_status: d.status.clone(),
+                        number: 0,
+                    });
+                record.number += 1;
+            };
+            let report: Vec<model::StatusReport> = map.into_iter().map(|(_id, rep)| rep).collect();
+            report
+        },
+        Err(e) => {
+            println!("{}", e.to_string());
+            Vec::new()
+        },
+    }
+}
 
 pub async fn get_appointments_for_service_request(car_service_id: u32) -> Result<Vec<model::AppointmentInfo>, reqwest::Error> {
     let url = format!("http://localhost:8084/api/appointments/car-service/{}", car_service_id);

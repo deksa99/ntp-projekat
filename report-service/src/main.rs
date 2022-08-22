@@ -33,9 +33,14 @@ async fn financial(car_service_id: u32) -> Json<model::FinancialReport> {
     Json(handle::financial_report(car_service_id).await)
 }
 
+#[get("/status/<car_service_id>")]
+async fn status(car_service_id: u32) -> Json<Vec<model::StatusReport>> {
+    Json(handle::status_report(car_service_id).await)
+}
+
 #[launch]
 fn rocket() -> Rocket<Build> {
     rocket::build()
-    .mount("/api/reports", routes![manufacturer, service, financial])
+    .mount("/api/reports", routes![manufacturer, service, financial, status])
     .register("/", catchers![not_found, default])
 }
