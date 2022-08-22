@@ -19,7 +19,7 @@ fn default(status: Status, req: &Request) -> String {
 }
 
 #[get("/manufacturer/<car_service_id>")]
-async fn manufacturer(car_service_id: u32) -> Json<Vec<model::AppointmentInfo>> {
+async fn manufacturer(car_service_id: u32) -> Json<Vec<model::ManufacturerReport>> {
     Json(handle::man_report(car_service_id).await)
 }
 
