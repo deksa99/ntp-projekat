@@ -32,9 +32,6 @@ var ReportServiceRoundRobin, _ = rr.New(
 )
 
 func DelegateResponse(response *http.Response, w http.ResponseWriter) {
-	w.Header().Set("Content-Type", response.Header.Get("Content-Type"))
-	w.Header().Set("Content-Length", response.Header.Get("Content-Length"))
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(response.StatusCode)
 	_, err := io.Copy(w, response.Body)
 	if err != nil {
@@ -46,14 +43,7 @@ func DelegateResponse(response *http.Response, w http.ResponseWriter) {
 	}
 }
 
-func CorsResponseHeaders(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, PATCH")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-}
-
 func HandleRequest(w http.ResponseWriter, r *http.Request, url string) {
-	CorsResponseHeaders(&w)
 	if r.Method == "OPTIONS" {
 		return
 	}

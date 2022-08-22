@@ -2,6 +2,7 @@ package router
 
 import (
 	"ApiGateway/handler"
+	cHandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -57,5 +58,8 @@ func HandleRequests() {
 	router.HandleFunc("/reports/financial/{carServiceId}", handler.FinancialReport).Methods("GET", "OPTIONS")
 	router.HandleFunc("/reports/status/{carServiceId}", handler.StatusReport).Methods("GET", "OPTIONS")
 
-	log.Fatal(http.ListenAndServe(":8090", router))
+	log.Fatal(http.ListenAndServe(":8090", cHandlers.CORS(
+		cHandlers.AllowedMethods([]string{"GET", "POST", "PATCH", "PUT", "OPTIONS"}),
+		cHandlers.AllowedHeaders([]string{"Accept", "Accept-Language", "Content-Type", "Content-Language", "Origin"}),
+		cHandlers.AllowedOrigins([]string{"*"}))(router)))
 }

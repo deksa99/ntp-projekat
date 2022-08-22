@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+
+import { selectToken } from  "./features/users/UsersSlice"
+import { getRoleFromToken } from "./util/JwtToken"
+
+import ProtectedRoute from "./util/ProtectedRoute"
+import Navbar from "./features/navbar/Navbar"
+
+import HomePage from "./features/pages/HomePage"
+import LoginPage from "./features/pages/LoginPage"
+import RegistrationPage from "./features/pages/RegistrationPage"
+import ServiceInfoPage from "./features/pages/ServiceInfoPage"
+import AppointmentsPage from "./features/pages/AppointmentsPage"
+
+import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux';
 
 function App() {
+  const token = useSelector(selectToken);
+  const [role, setRole] = useState(getRoleFromToken());
+  useEffect(() => {
+    setRole(getRoleFromToken())
+  }, [token]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route index element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/services" element={<ServiceInfoPage />} />
+        <Route path="/appointments" element={<ProtectedRoute isAllowed={!!role && role.includes('user')}/>}> 
+          <Route path="/appointments" element={<AppointmentsPage />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
 
