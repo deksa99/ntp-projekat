@@ -30,6 +30,25 @@ func GetReportedReviews(w http.ResponseWriter, _ *http.Request) {
 	}
 }
 
+func GetReviews(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	csId, _ := strconv.ParseUint(params["carServiceId"], 10, 32)
+	reported, err := service.GetReviews(uint(csId))
+
+	w.Header().Set("Content-Type", "application/json")
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	} else {
+		err = json.NewEncoder(w).Encode(reported)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+	}
+}
+
 func CreateReview(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	userId, _ := strconv.ParseUint(params["userId"], 10, 32)

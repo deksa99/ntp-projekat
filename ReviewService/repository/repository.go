@@ -57,3 +57,11 @@ func GetReports() []model.ReviewReport {
 
 	return reports
 }
+
+func GetReviews(id uint) []model.Review {
+	var reviews []model.Review
+
+	database.Db.Where("car_service_id = ?", id).Find(&reviews)
+
+	return reviews
+}

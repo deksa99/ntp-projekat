@@ -57,3 +57,11 @@ func GetReports(w http.ResponseWriter, r *http.Request) {
 	url := response.ReviewServiceRoundRobin.Next().Host + "/api/reviews/reported"
 	response.HandleRequest(w, r, url)
 }
+
+func GetReviews(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, _ := params["carServiceId"]
+
+	url := response.ReviewServiceRoundRobin.Next().Host + "/api/reviews/car-service/" + id
+	response.HandleRequest(w, r, url)
+}

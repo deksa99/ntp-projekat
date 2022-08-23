@@ -59,6 +59,22 @@ func GetReportedReviews() ([]response.ReportInfo, error) {
 	return infos, nil
 }
 
+func GetReviews(id uint) ([]response.ReviewInfo, error) {
+	reviews := repository.GetReviews(id)
+
+	var infos []response.ReviewInfo
+
+	for _, r := range reviews {
+		infos = append(infos, converter.ReviewToReviewInfo(&r))
+	}
+
+	if len(infos) == 0 {
+		return []response.ReviewInfo{}, nil
+	}
+
+	return infos, nil
+}
+
 func ReportReview(id uint) (response.ReviewInfo, error) {
 	review, err := repository.GetReviewById(id)
 	if err != nil {

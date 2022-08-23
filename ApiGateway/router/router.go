@@ -48,6 +48,7 @@ func HandleRequests() {
 
 	//Review service
 	router.HandleFunc("/reviews/reported", handler.GetReports).Methods("GET", "OPTIONS")
+	router.HandleFunc("/reviews/car-service/{carServiceId}", handler.GetReviews).Methods("GET", "OPTIONS")
 	router.HandleFunc("/reviews/{id}/report", handler.ReportReview).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/reviews/report/{id}/process", handler.ProcessReport).Methods("PATCH", "OPTIONS")
 	router.HandleFunc("/reviews/add", handler.AddReview).Methods("POST", "OPTIONS")
