@@ -28,6 +28,24 @@ export const getAppointmentsForService = createAsyncThunk(
   }
 );
 
+export const cancellAppointment = createAsyncThunk(
+  "appointments/cancell",
+  async (id) => {
+    return await api.patch(`/appointments/${id}/cancel`, {}).then((res) => {
+      return res.data;
+    });
+  }
+);
+
+export const finishAppointment = createAsyncThunk(
+  "appointments/finish",
+  async (id) => {
+    return await api.patch(`/appointments/${id}/finish`, {}).then((res) => {
+      return res.data;
+    });
+  }
+);
+
 const AppointmentsSlice = createSlice({
   name: "appointments",
   initialState: {
