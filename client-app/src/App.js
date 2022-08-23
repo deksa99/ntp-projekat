@@ -17,6 +17,7 @@ import LoginPage from "./features/pages/LoginPage";
 import RegistrationPage from "./features/pages/RegistrationPage";
 import ServiceInfoPage from "./features/pages/ServiceInfoPage";
 import AppointmentsPage from "./features/pages/AppointmentsPage";
+import ProfilePage from "./features/pages/ProfilePage";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -37,12 +38,12 @@ function App() {
         <Route path="/sign-up" element={<RegistrationPage />} />
         <Route path="/services" element={<ServiceInfoPage />} />
         <Route
-          path="/appointments"
           element={
             <ProtectedRoute isAllowed={!!role && role.includes("user")} />
           }
         >
           <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

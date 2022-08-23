@@ -11,8 +11,6 @@ const CarServiceDetailsTabs = ({ cs }) => {
     setValue(newValue);
   };
 
-  console.log(cs);
-
   return (
     <Box sx={{ width: "100%", typography: "body1" }}>
       <TabContext value={value}>

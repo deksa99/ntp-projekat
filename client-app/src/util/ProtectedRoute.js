@@ -1,13 +1,8 @@
-import { React } from "react";
+import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-const ProtectedRoute = ({
-  isAllowed,
-  redirectPath = '/landing',
-  children,
-}) => {
-  console.log("PR", isAllowed)
+const ProtectedRoute = ({ isAllowed, redirectPath = "/landing", children }) => {
   if (!isAllowed) {
     return <Navigate to={redirectPath} replace />;
   }

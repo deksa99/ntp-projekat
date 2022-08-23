@@ -63,7 +63,7 @@ func FindUserByAccountID(accountId uint) (model.User, error) {
 func FindUsers() []model.User {
 	var users []model.User
 
-	database.Db.Find(&users)
+	database.Db.Preload("Account").Find(&users)
 
 	return users
 }
@@ -71,7 +71,7 @@ func FindUsers() []model.User {
 func FindUserById(id uint) (model.User, error) {
 	var user model.User
 
-	database.Db.First(&user, id)
+	database.Db.Preload("Account").First(&user, id)
 
 	if user.ID == 0 {
 		return user, errors.New("user not found")

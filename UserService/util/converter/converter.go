@@ -9,6 +9,7 @@ func UserToUserInfo(user *model.User) response.UserInfo {
 	return response.UserInfo{
 		Id:        user.ID,
 		Email:     user.Email,
+		Username:  user.Account.Username,
 		FirstName: user.FirstName,
 		LastName:  user.LastName}
 }

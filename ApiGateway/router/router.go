@@ -61,6 +61,6 @@ func HandleRequests() {
 
 	log.Fatal(http.ListenAndServe(":8090", cHandlers.CORS(
 		cHandlers.AllowedMethods([]string{"GET", "POST", "PATCH", "PUT", "OPTIONS"}),
-		cHandlers.AllowedHeaders([]string{"Accept", "Accept-Language", "Content-Type", "Content-Language", "Origin"}),
+		cHandlers.AllowedHeaders([]string{"Accept", "Accept-Language", "Content-Type", "Content-Language", "Origin", "Authorization"}),
 		cHandlers.AllowedOrigins([]string{"*"}))(router)))
 }
