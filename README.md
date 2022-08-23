@@ -46,6 +46,7 @@ Sistem koriste sledeći korisnici
 	- Korisnički servis - Go
 	- Email servis - Go
 	- Servis za rezervaciju usluga auto servisa - Go
+	- Servis za automobile - Go
 	- Servis za izveštaje - Rust
 	- Servis za manipulaciju auto servisima - Go
 - Frontend
