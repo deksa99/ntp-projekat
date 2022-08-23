@@ -19,7 +19,7 @@ const AppointmentsList = () => {
   return (
     <List sx={{ width: "100%", minWidth: 360, bgcolor: "background.paper" }}>
       {appointments.map((a) => (
-        <AppointmentListItem app={a} />
+        <AppointmentListItem key={a.Id} app={a} />
       ))}
     </List>
   );

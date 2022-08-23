@@ -16,7 +16,7 @@ var (
 	}
 
 	reports = []model.ReviewReport{
-		{ReviewID: 1, Review: model.Review{}, Processed: true},
+		{ReviewID: 1, Review: model.Review{}, Processed: false},
 		{ReviewID: 3, Review: model.Review{}, Processed: true},
 	}
 )

@@ -35,7 +35,6 @@ const AddEditVehicleForm = ({ v, close }) => {
       dispatch(addVehicle({ vehicle }));
       close();
     }
-    console.log(data);
   };
 
   return (

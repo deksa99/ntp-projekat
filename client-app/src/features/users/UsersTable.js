@@ -38,13 +38,13 @@ const UsersTable = () => {
               <b>Email</b>
             </TableCell>
             <TableCell>
-              <b>Username</b>
+              <b>Korisnicko ime</b>
             </TableCell>
             <TableCell>
-              <b>FirstName</b>
+              <b>Ime</b>
             </TableCell>
             <TableCell>
-              <b>LastName</b>
+              <b>Prezime</b>
             </TableCell>
             <TableCell />
           </TableRow>

@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import {
-  TableCell,
-  TableContainer,
+  IconButton,
   Paper,
-  TableHead,
-  TableRow,
   Table,
   TableBody,
-  IconButton,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
-import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
+import DangerousOutlined from "@mui/icons-material/DangerousOutlined";
 
-const CarServiceReviewsTable = ({ cs }) => {
+const ReviewTable = () => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     api
-      .get(`/reviews/car-service/${cs.Id}`)
+      .get("/reviews/reported")
       .then((res) => {
         setReviews(res.data);
       })
@@ -26,15 +26,17 @@ const CarServiceReviewsTable = ({ cs }) => {
       });
   }, []);
 
-  const handleReportClick = (c) => {
-    console.log(c);
+  const handleInappropriate = (c) => {
+    const body = {
+      Inappropriate: true,
+    };
     api
-      .patch(`/reviews/${c.ID}/report`, {})
+      .patch(`/reviews/report/${c.ID}/process`, body)
       .then((res) => {
-        alert("Prijavljeno");
+        alert("Neprikladan");
       })
       .catch(() => {
-        alert("Greska. Vec prijavljeno ili niste prijavljeni.");
+        alert("Greska");
       });
   };
 
@@ -44,7 +46,10 @@ const CarServiceReviewsTable = ({ cs }) => {
         <TableHead>
           <TableRow>
             <TableCell>
-              <b>Usluga</b>
+              <b>Korisnik</b>
+            </TableCell>
+            <TableCell>
+              <b>Auto servis</b>
             </TableCell>
             <TableCell>
               <b>Ocena</b>
@@ -59,24 +64,26 @@ const CarServiceReviewsTable = ({ cs }) => {
           {reviews.map((c) => (
             <TableRow
               key={c.ID}
-              sx={{
-                "&:last-child td, &:last-child th": { border: 0 },
-                bgcolor: c.Inappropriate ? "red" : "default",
-              }}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="left">{c.ServiceName}</TableCell>
+              <TableCell align="left">
+                {c.FirstName} {c.LastName}
+              </TableCell>
+              <TableCell align="left">{c.CarServiceName}</TableCell>
               <TableCell align="left">{c.Rating}</TableCell>
               <TableCell align="left">{c.Comment}</TableCell>
-              <TableCell align="right">
-                <IconButton
-                  aria-label="delete"
-                  size="large"
-                  color="secondary"
-                  onClick={() => handleReportClick(c)}
-                >
-                  <ErrorOutlineOutlined fontSize="inherit" />
-                </IconButton>
-              </TableCell>
+              {!c.Processed && (
+                <TableCell align="right">
+                  <IconButton
+                    aria-label="delete"
+                    size="large"
+                    color="secondary"
+                    onClick={() => handleInappropriate(c)}
+                  >
+                    <DangerousOutlined fontSize="inherit" />
+                  </IconButton>
+                </TableCell>
+              )}
             </TableRow>
           ))}
         </TableBody>
@@ -85,4 +92,4 @@ const CarServiceReviewsTable = ({ cs }) => {
   );
 };
 
-export default CarServiceReviewsTable;
+export default ReviewTable;

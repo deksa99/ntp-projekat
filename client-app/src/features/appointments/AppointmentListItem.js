@@ -9,9 +9,11 @@ import { selectToken } from "../users/UsersSlice";
 import { ListItemButton } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { cancellAppointment, finishAppointment } from "./AppointmentsSlice";
+import ReviewModal from "../reviews/ReviewModal";
 
 const AppointmentListItem = ({ app }) => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const token = useSelector(selectToken);
   const [role, setRole] = useState(getRoleFromToken());
@@ -25,6 +27,14 @@ const AppointmentListItem = ({ app }) => {
 
   const finishAppointmentH = () => {
     dispatch(finishAppointment(app.Id));
+  };
+
+  const leaveReview = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -45,6 +55,9 @@ const AppointmentListItem = ({ app }) => {
             </React.Fragment>
           }
         />
+        {role === "user" && app.Status === "Finished" && (
+          <ListItemButton onClick={leaveReview}>Komentar</ListItemButton>
+        )}
         {role === "worker" && app.Status === "Scheduled" && (
           <ListItemButton onClick={cancellAppointmentH}>Otkazi</ListItemButton>
         )}
@@ -53,6 +66,7 @@ const AppointmentListItem = ({ app }) => {
         )}
       </ListItem>
       <Divider variant="inset" component="li" />
+      <ReviewModal id={app.Id} open={open} handleClose={handleClose} />
     </>
   );
 };

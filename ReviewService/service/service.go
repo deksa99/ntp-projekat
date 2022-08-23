@@ -105,6 +105,11 @@ func ProcessReport(id uint, inappropriate bool) (response.ReportInfo, error) {
 	report.Review.Inappropriate = inappropriate
 	report.Processed = true
 
+	_, err = repository.SaveReview(report.Review)
+	if err != nil {
+		return response.ReportInfo{}, err
+	}
+
 	_, err = repository.SaveReport(report)
 	if err != nil {
 		return response.ReportInfo{}, err
