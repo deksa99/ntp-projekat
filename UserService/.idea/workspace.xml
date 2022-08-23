@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="260ad430-6fae-4c39-a906-1f8df377e8c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ApiGateway/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiGateway/handler/userService.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiGateway/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiGateway/router/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ApiGateway/util/response/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://C:/Program Files/Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GotoFileConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="Directory" />
+      <filtered-out-file-type name="ActionScript" />
+      <filtered-out-file-type name="AspectJ" />
+      <filtered-out-file-type name="AUTO_DETECTED" />
+      <filtered-out-file-type name="C#" />
+      <filtered-out-file-type name="C++" />
+      <filtered-out-file-type name="CGO" />
+      <filtered-out-file-type name="Cookie storage file" />
+      <filtered-out-file-type name="CSS" />
+      <filtered-out-file-type name="CSV/TSV" />
+      <filtered-out-file-type name="Dictionary" />
+      <filtered-out-file-type name="Dockerfile" />
+      <filtered-out-file-type name="DTD" />
+      <filtered-out-file-type name="ECMAScript 6" />
+      <filtered-out-file-type name="EditorConfig" />
+      <filtered-out-file-type name="Flow" />
+      <filtered-out-file-type name="GitExclude file" />
+      <filtered-out-file-type name="GitIgnore file" />
+      <filtered-out-file-type name="Go Build" />
+      <filtered-out-file-type name="Go Fuzz Corpus" />
+      <filtered-out-file-type name="Go Plus Build" />
+      <filtered-out-file-type name="Go Tag" />
+      <filtered-out-file-type name="Go Template" />
+      <filtered-out-file-type name="Go Time" />
+      <filtered-out-file-type name="go.mod" />
+      <filtered-out-file-type name="Haskell" />
+      <filtered-out-file-type name="HgIgnore file" />
+      <filtered-out-file-type name="HTML" />
+      <filtered-out-file-type name="HTTP Request" />
+      <filtered-out-file-type name="IDEA_MODULE" />
+      <filtered-out-file-type name="IDEA_PROJECT" />
+      <filtered-out-file-type name="IDEA_WORKSPACE" />
+      <filtered-out-file-type name="IDL" />
+      <filtered-out-file-type name="IgnoreLang file" />
+      <filtered-out-file-type name="IntegrationPerformanceTest" />
+      <filtered-out-file-type name="JavaFX" />
+      <filtered-out-file-type name="JavaScript" />
+      <filtered-out-file-type name="Jest Snapshot" />
+      <filtered-out-file-type name="JSHint" />
+      <filtered-out-file-type name="JSON" />
+      <filtered-out-file-type name="JSON-lines" />
+      <filtered-out-file-type name="JSON5" />
+      <filtered-out-file-type name="JSP" />
+      <filtered-out-file-type name="JSX Harmony" />
+      <filtered-out-file-type name="Makefile" />
+      <filtered-out-file-type name="Markdown" />
+      <filtered-out-file-type name="PATCH" />
+      <filtered-out-file-type name="Perl" />
+      <filtered-out-file-type name="PHP" />
+      <filtered-out-file-type name="PLAIN_TEXT" />
+      <filtered-out-file-type name="protobuf" />
+      <filtered-out-file-type name="prototext" />
+      <filtered-out-file-type name="RegExp" />
+      <filtered-out-file-type name="RNG Compact" />
+      <filtered-out-file-type name="Shell Script" />
+      <filtered-out-file-type name="SourceMap" />
+      <filtered-out-file-type name="SQL" />
+      <filtered-out-file-type name="SVG" />
+      <filtered-out-file-type name="textmate" />
+      <filtered-out-file-type name="tsconfig" />
+      <filtered-out-file-type name="TypeScript" />
+      <filtered-out-file-type name="TypeScript JSX" />
+      <filtered-out-file-type name="x86 Plan9 Assembly" />
+      <filtered-out-file-type name="XHTML" />
+      <filtered-out-file-type name="XML" />
+      <filtered-out-file-type name="YAML" />
+      <filtered-out-file-type name="yarn.lock" />
+      <filtered-out-file-type name="ARCHIVE" />
+      <filtered-out-file-type name="CVP" />
+      <filtered-out-file-type name="Database Element" />
+      <filtered-out-file-type name="DATASOURCE_STORAGE" />
+      <filtered-out-file-type name="H2 Database" />
+      <filtered-out-file-type name="Image" />
+      <filtered-out-file-type name="Native" />
+      <filtered-out-file-type name="SQLite Database" />
+      <filtered-out-file-type name="UML" />
+      <filtered-out-file-type name="UNKNOWN" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DPG8CJzLxH3fDzbsEf5YP11ROx" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.format.on.save.advertiser.fired&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.watchers.conflict.with.on.save.actions.check.performed&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/deja9&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="run" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
+      <module name="UserService" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.run" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
