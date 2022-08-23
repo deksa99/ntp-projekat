@@ -15,27 +15,30 @@ Sistem koriste sledeći korisnici
  **Neregistrovani korisnik**
  - Prijava
  - Registracija
- - Promena lozinke
  - Pregled servisa
  - Pregled usluga servisa
  
  **Registrovani korisnik**
  - Funkcionalnosti *neregistrovanog* korisnika
- - Pronalaženje najbližeg servisa
+ - Pronalaženje najbližeg servisa*
  - Pregled/izmena profila
+ - Promena lozinke
  - Pregled/izmena svojih vozila
  - Zakazivanje i otkazivanje termina
  - Pregled svojih termina
+ - Ostavljanje recenzija
+ - Prijava komentara
 
 **Serviser**
 
 - Vršenje zakazanih intervencija
 - CRUD usluga servisa
-- Pregled izveštaja o poslovanju
+- Pregled izveštaja o poslovanju*
 
 **Administrator**
 
-- Dodavanje novih servisa i servisera za dati servis
+- Pregled prijavljenih komentara
+- Blokiranje korisnika na 3 dana
 
 # Arhitektura
 - Servisi - *podložno manjim promenama u toku implementacije*
