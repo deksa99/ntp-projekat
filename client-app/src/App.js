@@ -21,6 +21,7 @@ import ProfilePage from "./features/pages/ProfilePage";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import VehiclesPage from "./features/pages/VehiclesPage";
 
 function App() {
   const token = useSelector(selectToken);
@@ -44,6 +45,7 @@ function App() {
         >
           <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/vehicles" element={<VehiclesPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

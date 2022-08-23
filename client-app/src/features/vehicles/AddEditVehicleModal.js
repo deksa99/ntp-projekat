@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Box, Typography } from "@mui/material";
-import CarServiceDetailsTabs from "./CarServiceDetailsTabs";
+import AddEditVehicleForm from "./AddEditVehicleForm";
 
 const style = {
   position: "absolute",
@@ -13,24 +13,24 @@ const style = {
   m: 0,
 };
 
-const CarServiceDetailsModal = ({ open, handleClose, cs }) => {
+const AddEditVehicleModal = ({ open, handleClose, v }) => {
   return (
     <Modal open={open} onClose={handleClose}>
       <Box sx={style}>
         <Box>
           <Typography variant="h5" component="h5" sx={{ m: 0 }}>
-            {!!cs ? cs.Name : ""}
+            {!!v ? v.Manufacturer : "Dodavanje vozila"}
           </Typography>
           <Typography variant="subtitle2" component="h6" sx={{ m: 0 }}>
-            {!!cs ? cs.Street : ""}
+            {!!v ? v.CarModel : "Unesite podatke u tabelu ispod"}
           </Typography>
         </Box>
         <Box sx={{ mt: 2 }}>
-          <CarServiceDetailsTabs cs={cs} />
+          <AddEditVehicleForm v={v} close={handleClose} />
         </Box>
       </Box>
     </Modal>
   );
 };
 
-export default CarServiceDetailsModal;
+export default AddEditVehicleModal;
