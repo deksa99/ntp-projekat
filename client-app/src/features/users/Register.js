@@ -10,15 +10,31 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import api from "../../api/api";
+
 const Register = () => {
+  const register = (data) => {
+    api
+      .post("/users/register", data)
+      .then(() => {
+        alert("Uspesno registrovano");
+      })
+      .catch(() => {
+        alert("Greska prilikom registrovanja");
+      });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    // TODO request
+    const postData = {
+      FirstName: data.get("firstName"),
+      LastName: data.get("lastName"),
+      Email: data.get("email"),
+      Username: data.get("username"),
+      Password: data.get("password"),
+    };
+    register(postData);
   };
 
   return (

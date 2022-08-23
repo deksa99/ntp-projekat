@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Tab } from "@mui/material";
 import { TabList, TabPanel, TabContext } from "@mui/lab";
 import CarServiceCatalogTable from "./CarServiceCatalogTable";
+import CarServiceReviewsTable from "./CarServiceReviewsTable";
 
 const CarServiceDetailsTabs = ({ cs }) => {
   const [value, setValue] = React.useState("1");
@@ -24,7 +25,9 @@ const CarServiceDetailsTabs = ({ cs }) => {
         <TabPanel value="1">
           <CarServiceCatalogTable cs={cs} />
         </TabPanel>
-        <TabPanel value="2">Ocene</TabPanel>
+        <TabPanel value="2">
+          <CarServiceReviewsTable cs={cs} />
+        </TabPanel>
       </TabContext>
     </Box>
   );

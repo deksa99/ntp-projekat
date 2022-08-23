@@ -12,17 +12,20 @@ import {
 } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../users/UsersSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      role: data.get("role"),
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-    // TODO request
+    const role = data.get("role");
+    const username = data.get("username");
+    const password = data.get("password");
+
+    dispatch(login({ role: role, username: username, password: password }));
   };
 
   return (
