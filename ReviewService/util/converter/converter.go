@@ -18,6 +18,7 @@ func ReviewToReviewInfo(r *model.Review) response.ReviewInfo {
 		LastName:       r.LastName,
 		Rating:         r.Rating,
 		Comment:        r.Comment,
+		Inappropriate:  r.Inappropriate,
 	}
 }
 
@@ -35,6 +36,5 @@ func ReportToReportInfo(r *model.ReviewReport) response.ReportInfo {
 		Rating:         r.Review.Rating,
 		Comment:        r.Review.Comment,
 		Processed:      r.Processed,
-		Inappropriate:  r.Inappropriate,
 	}
 }

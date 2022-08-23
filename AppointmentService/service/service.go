@@ -36,6 +36,10 @@ func CreateAppointmentRequest(userId uint, vehicleId uint, serviceId uint, carSe
 		return response.AppointmentRequestInfo{}, errors.New("vehicle does not belong to the given user")
 	}
 
+	if !service.Available {
+		return response.AppointmentRequestInfo{}, errors.New("service unavailable")
+	}
+
 	request := model.AppointmentRequest{
 		UserID:         userId,
 		FirstName:      user.FirstName,

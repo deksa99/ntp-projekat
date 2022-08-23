@@ -21,6 +21,7 @@ type ReviewInfo struct {
 	LastName       string `json:"LastName"`
 	Rating         uint   `json:"Rating"`
 	Comment        string `json:"Comment"`
+	Inappropriate  bool   `json:"Inappropriate"`
 }
 
 type ReportInfo struct {
@@ -36,5 +37,4 @@ type ReportInfo struct {
 	Rating         uint   `json:"Rating"`
 	Comment        string `json:"Comment"`
 	Processed      bool   `json:"Processed"`
-	Inappropriate  bool   `json:"Inappropriate"`
 }

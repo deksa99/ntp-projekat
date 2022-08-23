@@ -81,9 +81,8 @@ func ReportReview(id uint) (response.ReviewInfo, error) {
 		return response.ReviewInfo{}, err
 	}
 	report := model.ReviewReport{
-		Review:        review,
-		Processed:     false,
-		Inappropriate: false,
+		Review:    review,
+		Processed: false,
 	}
 
 	_, err = repository.SaveReport(report)
@@ -103,7 +102,7 @@ func ProcessReport(id uint, inappropriate bool) (response.ReportInfo, error) {
 		return response.ReportInfo{}, errors.New("already processed")
 	}
 
-	report.Inappropriate = inappropriate
+	report.Review.Inappropriate = inappropriate
 	report.Processed = true
 
 	_, err = repository.SaveReport(report)

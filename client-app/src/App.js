@@ -25,6 +25,7 @@ import RequestsWorkerPage from "./features/pages/RequestsWorkerPage";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import VehiclesPage from "./features/pages/VehiclesPage";
+import CatalogPage from "./features/pages/CatalogPage";
 
 function App() {
   const token = useSelector(selectToken);
@@ -61,6 +62,7 @@ function App() {
             element={<AppointmentsWorkerPage />}
           />
           <Route path="/requests-worker" element={<RequestsWorkerPage />} />
+          <Route path="/catalog" element={<CatalogPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

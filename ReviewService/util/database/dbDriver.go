@@ -10,14 +10,14 @@ import (
 
 var (
 	reviews = []model.Review{
-		{AppointmentID: 1, UserID: 1, FirstName: "Mika", LastName: "Mikic", ServiceID: 11, ServiceName: "Monteža gume", CarServiceID: 2, CarServiceName: "Mile i sin", Rating: 4, Comment: "OK"},
-		{AppointmentID: 2, UserID: 1, FirstName: "Mika", LastName: "Mikic", ServiceID: 1, ServiceName: "Balansiranje", CarServiceID: 2, CarServiceName: "Mile i sin", Rating: 5, Comment: "Ekstra brzo i korektno"},
-		{AppointmentID: 3, UserID: 2, FirstName: "Vera", LastName: "Veric", ServiceID: 4, ServiceName: "Zamena sijalica", CarServiceID: 1, CarServiceName: "Kvačilo", Rating: 1, Comment: "Došla sam da zamenim sijalicu, došlo je toga da majstor 'mora da zameni' nekakav zmijac, zamajac, šta ti ja znam... Katastrofa!"},
+		{AppointmentID: 1, UserID: 1, FirstName: "Mika", LastName: "Mikic", ServiceID: 11, ServiceName: "Monteža gume", CarServiceID: 2, CarServiceName: "Mile i sin", Rating: 4, Comment: "OK", Inappropriate: false},
+		{AppointmentID: 2, UserID: 1, FirstName: "Mika", LastName: "Mikic", ServiceID: 1, ServiceName: "Balansiranje", CarServiceID: 2, CarServiceName: "Mile i sin", Rating: 5, Comment: "Ekstra brzo i korektno", Inappropriate: false},
+		{AppointmentID: 3, UserID: 2, FirstName: "Vera", LastName: "Veric", ServiceID: 4, ServiceName: "Zamena sijalica", CarServiceID: 1, CarServiceName: "Kvačilo", Rating: 1, Comment: "Došla sam da zamenim sijalicu, došlo je toga da majstor 'mora da zameni' nekakav zmijac, zamajac, šta ti ja znam... Katastrofa!", Inappropriate: true},
 	}
 
 	reports = []model.ReviewReport{
-		{ReviewID: 1, Review: model.Review{}, Processed: true, Inappropriate: false},
-		{ReviewID: 3, Review: model.Review{}, Processed: true, Inappropriate: true},
+		{ReviewID: 1, Review: model.Review{}, Processed: true},
+		{ReviewID: 3, Review: model.Review{}, Processed: true},
 	}
 )
 

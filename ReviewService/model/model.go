@@ -14,12 +14,12 @@ type Review struct {
 	LastName       string `gorm:"not null;default:null"`
 	Rating         uint   `gorm:"not null;default:null"`
 	Comment        string `gorm:"default:null"`
+	Inappropriate  bool   `gorm:"not null;default:false"`
 }
 
 type ReviewReport struct {
 	gorm.Model
-	ReviewID      uint   `gorm:"unique"`
-	Review        Review `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
-	Processed     bool   `gorm:"not null;default:false"`
-	Inappropriate bool   `gorm:"not null;default:false"`
+	ReviewID  uint   `gorm:"unique"`
+	Review    Review `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	Processed bool   `gorm:"not null;default:false"`
 }

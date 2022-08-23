@@ -8,9 +8,20 @@ import {
   TableRow,
   Table,
   TableBody,
+  IconButton,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
+import { getRoleFromToken } from "../../util/JwtToken";
+import { selectToken } from "../users/UsersSlice";
 
 const CarServiceReviewsTable = ({ cs }) => {
+  const token = useSelector(selectToken);
+  const [role, setRole] = useState(getRoleFromToken());
+  useEffect(() => {
+    setRole(getRoleFromToken());
+  }, [token]);
+
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -23,6 +34,18 @@ const CarServiceReviewsTable = ({ cs }) => {
         setReviews([]);
       });
   }, []);
+
+  const handleReportClick = (c) => {
+    console.log(c);
+    api
+      .patch(`/reviews/${c.ID}/report`, {})
+      .then((res) => {
+        alert("Prijavljeno");
+      })
+      .catch(() => {
+        alert(!!token ? "Vec prijavljeno" : "Prijavite se");
+      });
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -45,11 +68,24 @@ const CarServiceReviewsTable = ({ cs }) => {
           {reviews.map((c) => (
             <TableRow
               key={c.Id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": { border: 0 },
+                bgcolor: c.Inappropriate ? "red" : "default",
+              }}
             >
               <TableCell align="left">{c.ServiceName}</TableCell>
               <TableCell align="left">{c.Rating}</TableCell>
               <TableCell align="left">{c.Comment}</TableCell>
+              <TableCell align="right">
+                <IconButton
+                  aria-label="delete"
+                  size="large"
+                  color="secondary"
+                  onClick={() => handleReportClick(c)}
+                >
+                  <ErrorOutlineOutlined fontSize="inherit" />
+                </IconButton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
