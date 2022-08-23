@@ -3,6 +3,7 @@ import CarServiceReducer from "../features/car_services/CarServiceSlice";
 import UserReducer from "../features/users/UsersSlice";
 import VehicleReducer from "../features/vehicles/VehicleSlice";
 import AppointmentReducer from "../features/appointments/AppointmentsSlice";
+import RequestReducer from "../features/requests/RequestsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
     carService: CarServiceReducer,
     vehicle: VehicleReducer,
     appointment: AppointmentReducer,
+    request: RequestReducer,
   },
 });

@@ -60,7 +60,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "user", u.ID), nil
+				return createJwt(acc, "user", u.ID, 0), nil
 			}
 		}
 	case "admin":
@@ -69,7 +69,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "admin", a.ID), nil
+				return createJwt(acc, "admin", a.ID, 0), nil
 			}
 		}
 	case "worker":
@@ -78,7 +78,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 			if err != nil {
 				return response.Jwt{}, err
 			} else {
-				return createJwt(acc, "worker", w.ID), nil
+				return createJwt(acc, "worker", w.ID, w.CarServiceID), nil
 			}
 		}
 	default:
@@ -86,7 +86,7 @@ func Login(username string, password string, role string) (response.Jwt, error) 
 	}
 }
 
-func createJwt(acc model.Account, role string, userId uint) response.Jwt {
+func createJwt(acc model.Account, role string, userId uint, serviceId uint) response.Jwt {
 
 	jwtKey := []byte(os.Getenv("JWT_KEY"))
 
@@ -98,6 +98,7 @@ func createJwt(acc model.Account, role string, userId uint) response.Jwt {
 	claims["role"] = role
 	claims["id"] = acc.ID
 	claims["user_id"] = userId
+	claims["service_id"] = serviceId
 
 	token.Claims = claims
 

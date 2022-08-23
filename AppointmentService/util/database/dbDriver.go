@@ -112,7 +112,7 @@ var (
 		{AppointmentRequestID: 9, WorkerID: 6, FirstName: "Ivan", LastName: "Ivanovic", StartTime: time.Date(2022, 8, 16, 14, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.CancelledAppointment},
 
 		{AppointmentRequestID: 11, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 8, 26, 9, 0, 0, 0, time.Local), FinishTime: time.Time{}, Status: model.Scheduled},
-		{AppointmentRequestID: 14, WorkerID: 1, FirstName: "Gliša", LastName: "Glišić", StartTime: time.Date(2022, 8, 19, 9, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 8, 21, 9, 0, 0, 0, time.Local), Status: model.Finished},
+		{AppointmentRequestID: 14, WorkerID: 6, FirstName: "Ivan", LastName: "Ivanovic", StartTime: time.Date(2022, 8, 19, 9, 0, 0, 0, time.Local), FinishTime: time.Date(2022, 8, 21, 9, 0, 0, 0, time.Local), Status: model.Finished},
 	}
 )
 

@@ -30,3 +30,14 @@ export function getRoleFromToken() {
     return null;
   }
 }
+
+export function getServiceFromToken() {
+  try {
+    let token = JSON.parse(localStorage.getItem("user")).Token;
+    let parsedToken = JSON.parse(atob(token.split(".")[1]));
+    let sid = parsedToken["service_id"];
+    return sid;
+  } catch (e) {
+    return null;
+  }
+}

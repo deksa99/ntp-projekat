@@ -9,7 +9,7 @@ const AppointmentListItem = ({ app }) => {
     <>
       <ListItem alignItems="flex-start">
         <ListItemText
-          primary={`${app.ServiceName} | ${app.CarServiceName} - ${app.Street}`}
+          primary={`${app.ServiceName} | ${app.CarServiceName} - ${app.Street} ... Cena: ${app.ServicePrice}`}
           secondary={
             <React.Fragment>
               <Typography

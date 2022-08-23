@@ -17,7 +17,10 @@ import LoginPage from "./features/pages/LoginPage";
 import RegistrationPage from "./features/pages/RegistrationPage";
 import ServiceInfoPage from "./features/pages/ServiceInfoPage";
 import AppointmentsPage from "./features/pages/AppointmentsPage";
+import AppointmentsWorkerPage from "./features/pages/AppointmentsWorkerPage";
 import ProfilePage from "./features/pages/ProfilePage";
+import RequestsPage from "./features/pages/RequestsPage";
+import RequestsWorkerPage from "./features/pages/RequestsWorkerPage";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -43,9 +46,21 @@ function App() {
             <ProtectedRoute isAllowed={!!role && role.includes("user")} />
           }
         >
-          <Route path="/appointments" element={<AppointmentsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/vehicles" element={<VehiclesPage />} />
+          <Route path="/appointments" element={<AppointmentsPage />} />
+          <Route path="/requests" element={<RequestsPage />} />
+        </Route>
+        <Route
+          element={
+            <ProtectedRoute isAllowed={!!role && role.includes("worker")} />
+          }
+        >
+          <Route
+            path="/appointments-worker"
+            element={<AppointmentsWorkerPage />}
+          />
+          <Route path="/requests-worker" element={<RequestsWorkerPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
