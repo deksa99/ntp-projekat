@@ -50,12 +50,12 @@ func BlockUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id, _ := strconv.ParseUint(params["id"], 10, 32)
 
-	_, err := auth.Authentication(w, r, []string{"user", "admin", "worker"})
+	_, err := auth.Authentication(w, r, []string{"admin"})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusForbidden)
 		return
 	}
 
-	url := response.UserServiceRoundRobin.Next().Host + "/api/users" + strconv.FormatUint(id, 10) + "/block"
+	url := response.UserServiceRoundRobin.Next().Host + "/api/users/" + strconv.FormatUint(id, 10) + "/block"
 	response.HandleRequest(w, r, url)
 }

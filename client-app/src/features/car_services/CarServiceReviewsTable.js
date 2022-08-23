@@ -10,18 +10,9 @@ import {
   TableBody,
   IconButton,
 } from "@mui/material";
-import { useSelector } from "react-redux";
 import ErrorOutlineOutlined from "@mui/icons-material/ErrorOutlineOutlined";
-import { getRoleFromToken } from "../../util/JwtToken";
-import { selectToken } from "../users/UsersSlice";
 
 const CarServiceReviewsTable = ({ cs }) => {
-  const token = useSelector(selectToken);
-  const [role, setRole] = useState(getRoleFromToken());
-  useEffect(() => {
-    setRole(getRoleFromToken());
-  }, [token]);
-
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -43,7 +34,7 @@ const CarServiceReviewsTable = ({ cs }) => {
         alert("Prijavljeno");
       })
       .catch(() => {
-        alert(!!token ? "Vec prijavljeno" : "Prijavite se");
+        alert("Greska. Vec prijavljeno ili niste prijavljeni.");
       });
   };
 

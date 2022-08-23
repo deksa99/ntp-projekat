@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"UserService/repository"
 	"UserService/response"
 	"errors"
 	"net/http"
@@ -48,6 +49,13 @@ func Validate(r *http.Request, roles []string) (response.Authentication, error) 
 	accId, ok := claims["id"].(float64)
 	if !ok {
 		return response.Authentication{}, errors.New("acc parsing error")
+	}
+	acc, err := repository.FindAccountById(uint(accId))
+	if err != nil {
+		return response.Authentication{}, err
+	}
+	if time.Now().Before(acc.BlockedUntil) {
+		return response.Authentication{}, errors.New("account blocked until: " + acc.BlockedUntil.String())
 	}
 
 	userId, ok := claims["user_id"].(float64)

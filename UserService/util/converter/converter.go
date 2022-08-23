@@ -8,6 +8,7 @@ import (
 func UserToUserInfo(user *model.User) response.UserInfo {
 	return response.UserInfo{
 		Id:        user.ID,
+		AccountId: user.AccountID,
 		Email:     user.Email,
 		Username:  user.Account.Username,
 		FirstName: user.FirstName,

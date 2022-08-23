@@ -26,6 +26,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import VehiclesPage from "./features/pages/VehiclesPage";
 import CatalogPage from "./features/pages/CatalogPage";
+import UsersPage from "./features/pages/UsersPage";
+import ReviewPage from "./features/pages/ReviewPage";
 
 function App() {
   const token = useSelector(selectToken);
@@ -63,6 +65,14 @@ function App() {
           />
           <Route path="/requests-worker" element={<RequestsWorkerPage />} />
           <Route path="/catalog" element={<CatalogPage />} />
+        </Route>
+        <Route
+          element={
+            <ProtectedRoute isAllowed={!!role && role.includes("admin")} />
+          }
+        >
+          <Route path="/users" element={<UsersPage />} />
+          <Route path="/reviews" element={<ReviewPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

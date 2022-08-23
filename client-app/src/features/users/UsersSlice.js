@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../api/api";
 
+export const getAllUsers = createAsyncThunk("users/get_all", async () => {
+  return await api.get(`/users`).then((res) => {
+    return res.data;
+  });
+});
+
 export const login = createAsyncThunk(
   "users/login",
   async ({ role, username, password }) => {
@@ -19,6 +25,7 @@ const UsersSlice = createSlice({
   name: "user",
   initialState: {
     token: null,
+    users: [],
   },
   reducers: {
     logout(state, _) {
@@ -39,9 +46,19 @@ const UsersSlice = createSlice({
       state.token = null;
       localStorage.removeItem("user");
     },
+    [getAllUsers.pending]: (state, _) => {
+      state.users = [];
+    },
+    [getAllUsers.fulfilled]: (state, action) => {
+      state.users = action.payload;
+    },
+    [getAllUsers.rejected]: (state, _) => {
+      state.users = [];
+    },
   },
 });
 
 export const selectToken = (state) => state.user.token;
+export const selectUsers = (state) => state.user.users;
 export const { logout } = UsersSlice.actions;
 export default UsersSlice.reducer;
