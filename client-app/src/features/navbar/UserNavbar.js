@@ -47,11 +47,14 @@ const UserNavbar = () => {
         <Button href="/services" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
           Auto Servisi
         </Button>
-        <Button href="/vehicles" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-          Vozila
+        <Button href="/requests" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          Zahtevi
+        </Button>
+        <Button href="/appointments" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          Termini
         </Button>
         <Button href="/vehicles" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-          Termini
+          Vozila
         </Button>
         <Button href="/profile" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
           Profil

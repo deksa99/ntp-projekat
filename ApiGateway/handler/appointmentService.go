@@ -47,7 +47,7 @@ func GetAppointmentsForUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	id := strconv.Itoa(int(user.UserId))
-	url := response.AppointmentServiceRoundRobin.Next().Host + "/api/appointments/user" + id
+	url := response.AppointmentServiceRoundRobin.Next().Host + "/api/appointments/user/" + id
 	response.HandleRequest(w, r, url)
 }
 
